@@ -1,0 +1,32 @@
+nav {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+nav ul li {
+  border: 2px solid blue;
+  font-size: 1rem;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 3px;
+  border: 2px solid blue;
+}
+
+nav ul li a.active {
+  background-color: red;
+}
+/*# sourceMappingURL=nav-main.component.css.map */

@@ -1,0 +1,52 @@
+<form novalidate #signup="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div>
+    <label >First Name</label>
+    <input type="text" #firstNameVar="ngModel" required placeholder="enter first name" name="fName" [(ngModel)]="user.firstName" pattern="^[a-zA-Z]+$">
+  </div>
+  <div [hidden]="firstNameVar.valid || firstNameVar.pristine" class="errors">letters only!</div>
+  <div>
+      <label>Last Name</label>
+    <input type="text" #lastNameVar="ngModel" required placeholder="enter surname" name="ltName" [(ngModel)]="user.lastName"  pattern="^[a-zA-Z]+$">
+  </div>
+  <div [hidden]="lastNameVar.valid || lastNameVar.pristine" class="errors">letters only!</div>
+  <div>
+      <label>Email</label>
+    <input type="email" #emailVar="ngModel" requierd placeholder="enter your email" name="email"
+     [(ngModel)]="user.email" pattern="^([\w_\-\.]+)@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$">
+  </div>
+  <div [hidden]="emailVar.valid || emailVar.pristine" class="errors">Illegal Email Address!!</div>
+  <div>
+      <label>Phone</label>
+    <input type="text" #phoneVar="ngModel" required placeholder="enter phone number" name="phone" [(ngModel)]="user.phone" pattern="^\d{2,3}-\d{7}$">
+  </div>
+  <div [hidden]="phoneVar.valid || phoneVar.pristine" class="errors">Only The Next Formats: 12-1234567 or 123-1234567</div>
+  <div>
+      <label>Birth-Day</label>
+      <input type="text" #birthDayVar="ngModel" required placeholder="enter your birth day" name="bDay"  [(ngModel)]="user.birthDay" pattern="^\d{1,2}\/\d{1,2}\/\d{4}$">
+  </div>
+  <div [hidden]="birthDayVar.valid || birthDayVar.pristine" class="errors">Only The Folloing Format: DD/MM/YYYY</div>
+  <!--user type ngFor-->
+  <h2>Choose your user type</h2>
+  <div class="radio" *ngFor="let uType of userTypes">
+    <input type ="radio" name="uType" id="radio" [(ngModel)]="user.userType" [value] = "uType" >
+    <label for="radio">{{uType}}</label>
+  </div>
+
+
+  <!--Gruping the passwords-->
+  <!-- <div class="passwords" ngModelGroup="validPasswords" #equalPasswords="ngModelGroup"> -->
+    <div>
+      <label>Password</label>
+      <input type="text" #password="ngModel" required placeholder="enter password" name="pass"  [(ngModel)]="user.password" pattern="^[a-zA-Z]\w{3,14}$">
+    </div>
+    <div [hidden]="password.valid || password.pristine" class="errors">Illegal Password Enterd</div>
+    <div>
+        <label>Re-enter Password</label>
+        <input type="text" #varifyPassword="ngModel" required placeholder="re-enter password" name="vPass"  [(ngModel)]="varifyPassword.value" pattern="^[a-zA-Z]\w{3,14}$">
+    </div>
+    <div [hidden]="varifyPassword.valid || varifyPassword.pristine" class="errors">Illegal Password Enterd</div>
+  <!-- </div> -->
+    <!--Show only if passwords arent equal-->
+    <div  [hidden]= "comparePasswords(password.value,varifyPassword.value) || !password.valid || password.pristine || !varifyPassword.valid || varifyPassword.pristine" class="errors">Passwords Are Not The Same</div>
+<input type="submit" label="sign up">
+</form>

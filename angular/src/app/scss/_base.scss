@@ -1,0 +1,11 @@
+@import "macros";
+
+$red :red;
+$green:green;
+
+.main-wrapper{
+  width: 80%;
+  margin: 2rem auto;
+  max-width: 1200px;
+  border: 2px solid red;
+}
