@@ -1,0 +1,189 @@
+@import "./base";
+
+//////////////////////////////////////////////////////////////////////////////////
+// general
+//////////////////////////////////////////////////////////////////////////////////
+
+$text-color: $text-white;
+$outline-color: $text-white;
+$font-size: 1.3rem;
+$font-family: $primary-font-family;
+
+::placeholder {
+  color: $text-color;
+  letter-spacing: 1.5px;
+  font-size: calc(#{$font-size}* 0.9);
+  opacity: 0.5;
+}
+
+form {
+  display: grid;
+  grid-gap: 1.5rem;
+  color: $text-color;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// input
+//////////////////////////////////////////////////////////////////////////////////
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  padding: 0.7em;
+  color: $text-color;
+  font-size: $font-size;
+  border: 1px solid;
+
+  border-color: $light-gray;
+  font-weight: normal;
+
+  letter-spacing: 1.5px;
+  font-family: $primary-font-family;
+
+  &:focus {
+    outline-color: $outline-color; //maybe this or default blue
+
+    // outline-color: transparent;
+    // border-color: transparent;
+    // box-shadow: inset 0 0 0 3px $outline-color;
+  }
+
+  &.ng-dirty.ng-invalid {
+    border: 1px solid red;
+    outline-color: transparent;
+  }
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  // border: 1px solid green;
+  -webkit-text-fill-color: $text-color;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input[type="submit"] {
+  font-family: $header-font-family;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  font-size: calc(#{$font-size}* 1.4);
+  letter-spacing: 0.1em;
+  background: $dark-purple;
+  transition: 0.5s;
+  border: 0px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: lighten($color: $dark-purple, $amount: 5);
+    outline: none;
+  }
+}
+
+form.ng-invalid {
+  input[type="submit"] {
+    background: lighten($gray, 10%);
+  }
+}
+
+label {
+  font-size: $font-size;
+}
+
+// helpME how to insert sass variables into calc function
+//////////////////////////////////////////////////////////////////////////////////
+// errors
+//////////////////////////////////////////////////////////////////////////////////
+.errors {
+  font-size: calc(#{$font-size}* 1.1);
+  text-align: center;
+  font-size: $font-size;
+  letter-spacing: 1.5px;
+  padding: 0.7em;
+  background-color: lighten($gray, 10%);
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// fieldset
+//////////////////////////////////////////////////////////////////////////////////
+fieldset {
+  padding: 0.7em;
+  border: 1px solid $light-gray;
+
+  legend {
+    padding: 5px;
+    font-size: $font-size;
+    letter-spacing: 1.5px;
+    opacity: 0.5;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// radio (angular material styling)
+//////////////////////////////////////////////////////////////////////////////////
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: $desktop) {
+    flex-direction: column;
+
+    .radio-button {
+      margin: 5px 0;
+    }
+  }
+}
+
+::ng-deep .mat-radio-group {
+  margin: 5px;
+
+  .mat-radio-outer-circle {
+    border-color: $text-color !important;
+  }
+
+  .mat-radio-label {
+    display: flex;
+    align-items: center;
+    letter-spacing: 1.5px;
+    font-family: $primary-font-family;
+  }
+
+  // .mat-radio-ripple {
+  //   display: none;
+  // }
+
+  .mat-radio-label-content {
+    font-size: $font-size;
+    opacity: 0.5;
+  }
+
+  .mat-radio-inner-circle {
+    background-color: transparent !important;
+  }
+
+  .mat-radio-checked .mat-radio-inner-circle {
+    background-color: $text-color !important;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// tooltip from material
+//////////////////////////////////////////////////////////////////////////////////
+::ng-deep .mat-tooltip {
+  font-family: $primary-font-family;
+  font-size: 1.4rem;
+  background-color: darken($gray, 10%);
+  color: #bbb;
+  letter-spacing: 2px;
+  font-weight: 100;
+}

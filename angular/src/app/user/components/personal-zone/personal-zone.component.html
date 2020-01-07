@@ -1,0 +1,35 @@
+<div class="main-wrapper" *ngIf="user">
+  <user-display [showUser]="user"></user-display>
+
+  <div *ngIf="uTypes$ | async as uTypes">
+    <mat-form-field>
+      <mat-label>select user type:</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let type of uTypes" [value]="type" (onSelectionChange)="changType(type)">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!--br just for know! to see more clearlly-->
+  <br><br>
+  <div class="lists">
+    <!--AMIT this will show if user is currently admin-->
+    <div *ngIf="user.type === 'Admin'">
+      <admin-personal-zone></admin-personal-zone>
+    </div>
+
+    <div *ngIf="user.type === 'Business Owner'">
+      <owner-personal-zone></owner-personal-zone>
+    </div>
+    <div *ngIf="user.type === 'Client'">
+      <client-personal-zone></client-personal-zone>
+    </div>
+
+  </div>
+  <!-- <div class="lists" *ngIf="businessesToShow && businessesToShow.type !== ''">
+  <list-to-show [userForList]="businessesToShow"></list-to-show>
+  <div class="list" *ngIf="usersToshow && showUsers">
+    <list-to-show [userForList]="usersToshow"></list-to-show>
+</div> -->
+</div>

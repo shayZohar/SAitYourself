@@ -1,0 +1,89 @@
+@import "../../../scss/base";
+
+
+.gallery-buttons {
+  margin: 3rem 0;
+
+  button {
+    margin-right: 2rem;
+    color: $dark-purple;
+  }
+
+}
+
+
+
+.gallery {
+
+  margin: 3rem auto;
+
+  padding: 5px;
+  box-shadow: inset 1px 1px 5px $dark-purple, inset -1px -1px 5px $dark-purple;
+  background: white;
+
+  padding: 2rem;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
+  align-items: center;
+  grid-gap: 5px 10px;
+  // grid-auto-rows: 100px;
+
+  .image {
+    position: relative;
+    max-width: 200px;
+    padding: 2rem;
+    border: 1px solid $dark-purple;
+    cursor: pointer;
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .mat-checkbox {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+
+      ::ng-deep .mat-checkbox-frame {
+        border-color: $dark-purple;
+      }
+
+      ::ng-deep .mat-ripple-element {
+        // background-color: $light-purple;
+
+      }
+    }
+
+    ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+      background-color: $dark-purple;
+      // outline: 2px solid white;
+      // box-shadow: 1px 1px 2px white;
+    }
+  }
+}
+
+::ng-deep .lightbox-shown {
+
+  .lightbox-container {
+    width: 100vw !important;
+  }
+
+  .lightbox-close {
+    color: transparent;
+    text-shadow: none;
+  }
+
+  .lightbox-close::after {
+    content: "\2715";
+    color: white;
+    font-size: 2em;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+  }
+}

@@ -1,0 +1,66 @@
+<div *ngIf="isOwner">
+<h1>Upload An Image</h1>
+<!-- <input style="display: none"
+type="file"
+(change)="onFileSelected($event)"
+#fileInput>
+<button type="button" (click)="fileInput.click()">Pick File</button>
+<button type="button" (click)="onUpload($event)">Upload</button> -->
+
+<p-fileUpload name="demo[]" url="http://localhost:5000/api/Upload/file?bName={{bName}}" (onUpload)="onUpload($event)"
+  multiple="multiple" accept="image/*" maxFileSize="1000000">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <h2>Files Uploaded</h2>
+      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+    </ul>
+  </ng-template>
+</p-fileUpload>
+
+
+
+<ng-container *ngIf="receivedFiles?.length !== 0; else noFiles">
+
+
+  <div class="gallery-buttons">
+    <button mat-raised-button (click)="deleteSelected()">Delete Selected</button>
+    <button mat-raised-button (click)="chooseAll()">{{selectStr}}</button>
+
+  </div>
+
+
+
+  <section class="gallery">
+    <figure class="image" *ngFor="let image of receivedFiles">
+
+      <img src="http://localhost:5000/Resources/Images/{{bName}}/{{image.fileName}}" alt="{{image}}"
+      lightbox >
+
+      <mat-checkbox (change)="addRemoveFiles(image)" [ngModel]="selectAll"></mat-checkbox>
+
+    </figure>
+  </section>
+
+</ng-container>
+<ng-template #noFiles>
+  <p class="no-files">Your gallery is empty</p>
+</ng-template>
+
+</div>
+
+<div *ngIf="!isOwner">
+<h2 style="padding: 8px;">Our Gallery</h2>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let image of receivedFiles" > <img src="http://localhost:5000/Resources/Images/{{bName}}/{{image.fileName}}"
+      alt="{{image}}">
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+ <!-- <ng-container *ngIf="receivedFiles">
+  <h2>Gallery</h2>
+  <img *ngFor="let image of receivedFiles" src="http://localhost:5000/Resources/Images/{{bName}}/{{image.fileName}}"
+    alt="{{image}}">
+
+</ng-container> -->
+</div>

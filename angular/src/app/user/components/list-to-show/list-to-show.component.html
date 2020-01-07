@@ -1,0 +1,7 @@
+<div *ngIf="listToShow$ | async as listToShow">
+  <div *ngFor="let row of listToShow; let i= index">
+      <h3> NAME: {{row.name}}</h3>
+      <h3> EMAIL: {{row.email}}</h3>
+  </div>
+
+</div>

@@ -1,0 +1,10 @@
+@import "../../../scss/base";
+
+
+
+:host {
+  flex-grow: 1;
+  @extend %center;
+}
+
+

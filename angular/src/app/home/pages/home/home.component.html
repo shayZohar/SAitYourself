@@ -1,0 +1,23 @@
+<div  [ngClass]="{'svg': true,'logo-anim': startLogoAnim, 'no-logo': !startLogoAnim}">
+  <img src="/assets/images/logo-anim.svg" alt="logo-anim">
+</div>
+<div class="main-wrapper">
+
+  <!-- <a [routerLink]="['/admin']">ADMIN</a> -->
+  <div id="titleDiv">
+    <h1>TAKE YOUR BUSINESS TO THE NEXT LEVEL</h1>
+    <h2>search for a business:</h2>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Our Sites</mat-label>
+    <mat-select  [(value)]="selected">
+      <mat-option *ngFor="let b of bArr" [value]="b.bName" (click)="goToSite($event, b)">
+        {{b.bName}}
+      </mat-option>
+    </mat-select>
+    <p>You selected: {{selected}}</p>
+  </mat-form-field>
+  <!-- <ejs-schedule  [selectedDate]='selectedDate' [eventSettings]='eventSettings'></ejs-schedule> -->
+
+</div>

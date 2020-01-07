@@ -1,0 +1,21 @@
+
+@import "../../../scss/form";
+
+//host instead of "form"
+:host {
+  width: 100%;
+
+}
+
+form {
+  grid-template-columns: repeat(2, 1fr);
+
+  div:not(.short-col) {
+    grid-column: 1/-1;
+  }
+  @media(max-width: $tablet){
+    .short-col{
+      grid-column: 1/-1;
+    }
+  }
+}

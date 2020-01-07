@@ -1,5 +1,17 @@
-<nav>
+
+
+<!-- <nav>
   <ul>
     <li  *ngFor="let link of links"> <a [routerLink]="link.route" [routerLinkActive]="'active'">{{link.label}}</a></li>
   </ul>
+</nav> -->
+
+
+<nav>
+  <div class="logo"><img src="assets/images/logo.svg"></div>
+  <div mat-tab-nav-bar [backgroundColor]="'red'">
+    <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link" [active]="activeLink == link"
+      [routerLink]="link.route" [routerLinkActive]="'active'"> {{link.label}} </a>
+      <a *ngIf="currentUser"  mat-tab-link (click)="logout()">Logout</a>
+  </div>
 </nav>

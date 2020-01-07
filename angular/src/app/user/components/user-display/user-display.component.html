@@ -1,0 +1,64 @@
+<p *ngIf="user; else noEmail">
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{user.fName}}</mat-card-title>
+        <mat-card-subtitle>{{user.lName}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <div *ngFor="let show of toShow">
+            <span *ngIf="show && show != user.token">{{show}}</span>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </p>
+<ng-template #noEmail>
+  <h2>no Email Available </h2>
+</ng-template>
+
+<!--<p *ngIf="user?.email; else noEmail">{{user.email}}</p>
+<ng-template #noEmail>
+  <h2>no email</h2>
+</ng-template>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>
+      <p *ngIf="user?.fName; else noName">{{user.fName}}</p>
+      <p *ngIf="user?.lName; else nolName">{{user.lName}}</p>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+
+
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-tab-group>
+      <mat-tab label="Birth-Day">
+        <p *ngIf="user?.bDay; else nobirthday">{{user.bDay}}</p>
+        <ng-template #nobirthday>
+          <h2>no birth day</h2>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="type">
+        <p *ngIf="user?.type; else noType">{{user.type}}</p>
+      </mat-tab>
+      <mat-tab label="email">
+        <p *ngIf="user?.email; else noemail">{{user.email}}</p>
+      </mat-tab>
+    </mat-tab-group>
+
+
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>-->

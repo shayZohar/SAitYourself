@@ -1,5 +1,12 @@
 
+
 <header>
-  <sh-nav-main [links]="links"></sh-nav-main>
+  <sh-nav-main [links]="links" [currentUser]="currentUser" (logOut)="logout()"></sh-nav-main>
 
 </header>
+<!-- <nav mat-tab-nav-bar [backgroundColor]="background">
+    <a mat-tab-link *ngFor="let link of links"
+       (click)="activeLink = link"
+       [active]="activeLink == link"> {{link}} </a>
+    <a mat-tab-link disabled>Disabled Link</a>
+  </nav> -->

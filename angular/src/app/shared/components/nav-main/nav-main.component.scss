@@ -1,24 +1,80 @@
+
+
+@import "../../../scss/base";
+
+
 nav {
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw; // prevent shifting with scroll
+  opacity: .9;
+  background: rgba(0, 0, 0, .9); //$gray;
+
   display: flex;
-  justify-content: center;
 
-  ul {
+
+  .logo {
+    width: 60px;
     display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 1rem;
 
-    li {
-      border: 2px solid blue;
-      font-size: 1rem;
-      list-style: none;
-
-      a {
-        text-decoration: none;
-        padding: 3px;
-        border: 2px solid blue;
-        &.active{
-          background-color: red;
-        }
-      }
+    img {
+      display: block;
+      width: 100%;
+      padding: 5px;
     }
   }
+
+
+  .mat-tab-nav-bar ::ng-deep  {
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+
+
+
+    .mat-tab-links {
+      width: 100%;
+      display: flex;
+      // justify-content: space-around;
+      justify-content: flex-end;
+
+      .mat-tab-link {
+        color: #fff;
+        font-family: $header-font-family;
+        font-size: 1.6rem;
+        font-weight: 400;
+        cursor: pointer;
+        z-index: 10;
+        transition: .5s;
+        opacity: 1;
+
+        @media (max-width: $tablet) and (min-width: $mobile-large) {
+          padding: 0;
+          min-width: 100px;
+        }
+
+        &:hover {
+          color: $light-purple;
+          // opacity: .5;
+        }
+
+      }
+
+      .mat-ink-bar {
+        background-color: $dark-purple;
+        height: 100%;
+        // height: 10px;
+        z-index: 0;
+      }
+    }
+
+  }
+
 }

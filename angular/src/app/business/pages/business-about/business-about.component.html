@@ -1,0 +1,21 @@
+<div class="main-wrapper">
+
+    <h1>WELCOME TO {{businessName}}</h1>
+    <h1 style="white-space:pre; text-align: center;" #editableHeader contenteditable=[{canEdit}]
+      (input)="bAbout.headerText=$event.target.textContent"></h1>
+
+    <p style="white-space:pre">{{bAbout.headerText}}</p>
+    <!--AMIT-->
+    <h2 style="white-space:pre; text-align: center;" #editableSubHeader contenteditable=[{canEdit}]
+      (input)="bAbout.subHeaderText=$event.target.innerText"></h2>
+
+
+
+    <article style="white-space:pre; text-align: center;" #editableArtical contenteditable=[{canEdit}]
+      (input)="bAbout.articalText=$event.target.innerText"></article>
+
+    <article style="white-space:pre; text-align: center;" #editableAddress contenteditable=[{canEdit}]
+      (input)="bAbout.address=$event.target.innerText"></article>
+      <sh-upload></sh-upload>
+    <button *ngIf="canEdit" (click)="saveChanges()">save</button>
+  </div>

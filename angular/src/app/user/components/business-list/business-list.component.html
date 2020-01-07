@@ -1,0 +1,13 @@
+<div *ngIf="businessListToShow$ | async as businessListToShow">
+  <div *ngFor="let business of businessListToShow" (click)="changeBusiness(business)">
+    <h3> NAME: {{business.bName}}</h3>
+
+    <!-- options to use for client -->
+    <div *ngIf="this.dataForList.request !== 'all'">
+      <p>X</p>
+      <!--AMIT question: is admin need to get an option to add businesses-->
+      <p *ngIf="isBusinessOwner()">+</p>
+    </div>
+  </div>
+
+</div>

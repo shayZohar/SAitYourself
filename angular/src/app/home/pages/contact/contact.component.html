@@ -1,0 +1,75 @@
+<div class="main-wrapper">
+  <div class="form-wrapper">
+    <h2 class="h2-header">
+      Please fill in this form
+    </h2>
+    <form novalidat #signup="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+      <div class="form-group short-col">
+        <input to type="text" #firstNameVar="ngModel" required placeholder="first name *" id="fName" name="fName"
+          [(ngModel)]="fName" pattern="^[a-zA-Z]+$">
+
+        <!-- validate first name-->
+        <div *ngIf="firstNameVar.invalid && (firstNameVar.dirty || firstNameVar.touched)" class="errors">
+          <div *ngIf="firstNameVar?.errors?.required">
+            First name is required.
+          </div>
+          <div *ngIf="firstNameVar?.errors?.pattern">
+            Letters only
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group short-col">
+        <input type="text" #lastNameVar="ngModel" required placeholder="last name *" id="ltName" name="ltName"
+          [(ngModel)]="lName" pattern="^[a-zA-Z]+$">
+        <!-- validate last name-->
+        <div *ngIf="lastNameVar?.invalid && (lastNameVar.dirty || lastNameVar.touched)" class="errors">
+          <div *ngIf="lastNameVar?.errors?.required">
+            Last name is required.
+          </div>
+          <div *ngIf="lastNameVar?.errors?.pattern">
+            Letters only!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="email" #emailVar="ngModel" required placeholder="email *" id="email" name="email"
+          [(ngModel)]="email"
+          pattern="^([\w_\-\.]+)@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$"
+          matTooltip="ex. amit@gmail.com" matTooltipPosition="above" [matTooltipDisabled]="emailVar.valid">
+
+        <!-- validate email -->
+        <div *ngIf="emailVar?.invalid && (emailVar.dirty || emailVar.touched)" class="errors">
+          <div *ngIf="emailVar?.errors?.required">
+            Email is required.
+          </div>
+          <div *ngIf="emailVar?.errors?.pattern">
+            Invalid email
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <input type="text" #phoneVar="ngModel" placeholder="phone number" id="phone" name="phone" [(ngModel)]="phone"
+          pattern="^\d{2,3}-\d{7}$">
+        <div *ngIf="phoneVar?.invalid && (phoneVar.dirty || phoneVar.touched)" class="errors">
+          The Next Formats: 12-1234567 or 123-1234567
+        </div>
+      </div>
+      <div class="form-group">
+        <textarea type="text" #mesVar="ngModel" placeholder="message" id="message" name="message" rows="20"
+          [(ngModel)]="message"></textarea>
+      </div>
+      <!-- div is workaround to show tooltip on disabled button -->
+      <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="signup.valid">
+        <input type="submit" [disabled]="signup.invalid" label="sign up">
+      </div>
+
+    </form>
+
+  </div>
+</div>

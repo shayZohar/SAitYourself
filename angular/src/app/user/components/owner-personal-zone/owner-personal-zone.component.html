@@ -1,0 +1,7 @@
+<H2>Your Businesses:</H2>
+<business-list [dataForList]="setRequest('Owner')" (chosenBusiness)="changeCurrentBusiness($event)"></business-list>
+
+<div *ngIf="showClients">
+  <h2>HERE WE ARE SHOWING CLIENTS OF BUSINESS</h2>
+  <users-list [dataForList]="setRequest('Business')"></users-list>
+</div>

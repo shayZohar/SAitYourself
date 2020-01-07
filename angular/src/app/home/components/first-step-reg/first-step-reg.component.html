@@ -1,0 +1,10 @@
+<div class="form-wrapper">
+  <div class="links">
+    <a [routerLink]="'login'" [routerLinkActive]="'router-link-active'" (click)="onActive('login')">Login</a>
+    <a [routerLink]="'sign-up'" [routerLinkActive]="'router-link-active'" (click)="onActive('signup')">Sign-Up</a>
+  </div>
+
+  <p class="form-header">{{headerText}}</p>
+  <router-outlet></router-outlet>
+<p (click)="onClick()">click </p>
+</div>

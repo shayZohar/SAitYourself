@@ -1,0 +1,168 @@
+<!-- template for buttons -->
+<ng-template #buttons let-message>
+  <div class="buttons">
+    <i class="material-icons-outlined" (click)="deleteMessage($event,message)" matTooltip="delete"
+      matTooltipPosition="below">
+      delete
+    </i>
+    <i class="material-icons-outlined" (click)="markUnRead($event,message)" matTooltip="mark as unread"
+      matTooltipPosition="below">
+      markunread
+    </i>
+    <i class="material-icons" (click)="selectMessage($event, message)" matTooltip="reply" matTooltipPosition="below">
+      reply
+    </i>
+  </div>
+</ng-template>
+
+
+<!-- helpME to use the template from above in any place in the code
+<ng-template [ngTemplateOutlet]="buttons"></ng-template>
+-->
+
+<section class="section">
+  <h2 class="h2-header">
+    <span class="h2-header__received" (click)="received=true"
+      [ngClass]="{'active-received': received === true}">Received</span> /
+    <span class="h2-header__sent" (click)="received=false"
+      [ngClass]="{'active-received': received === false}">Sent</span>
+  </h2>
+
+  <!-- messages -->
+  <ng-container *ngIf="received">
+    <div *ngIf="messagesRec else noMessages">
+      <p-dataView #dv [value]="messagesRec" [paginator]="true" [rows]="20" paginatorPosition="bottom" filterBy="Sender">
+
+        <p-header>
+
+
+
+          <div class="sort-search">
+            <!-- add here sort by and serach by -->
+            <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)"
+        [style]="{'min-width':'15em'}"></p-dropdown> -->
+
+            <p-dropdown class="select" [options]="selectOptions" [(ngModel)]="selectedOption"
+              placeholder="Select mails">
+            </p-dropdown>
+
+            <p-dropdown class="sort" [options]="sortOptions" [(ngModel)]="sortedOption" placeholder="Sort By">
+            </p-dropdown>
+
+            <input class="search" type="search" pInputText placeholder="Search by sender name"
+              (keyup)="dv.filter($event.target.value)">
+          </div>
+
+        </p-header>
+
+        <ng-template let-message pTemplate="listItem">
+          <p-accordion (onOpen)="[markAsRead($event,message)]">
+
+            <p-accordionTab toggleable="true" collapsed="true" [ngClass]="{read: message.read}">
+              <p-header class="acc-header" [ngClass]="{read: message.read}">
+                {{message.subJect}}
+                <!-- reuse template and entering the variable we want it to work on, here is message-->
+                <ng-template *ngTemplateOutlet="buttons; context: {$implicit: message}"></ng-template>
+
+              </p-header>
+
+
+              <div class="message">
+                <div class="message-details" [ngClass]="{read: message.read}">
+                  <div class="subject">{{message.subJect}}</div>
+                  <div class="sender">by {{message.senderId}}</div>
+                  <div class="date">{{message.date}}</div>
+                  <div class="content">{{message.messContent}}</div>
+                </div>
+
+                <!-- reuse template -->
+                <ng-template *ngTemplateOutlet="buttons; context: {$implicit: message}"></ng-template>
+
+              </div> <!-- end of message -->
+            </p-accordionTab>
+          </p-accordion>
+        </ng-template>
+
+      </p-dataView>
+
+    </div>
+  </ng-container>
+
+  <!--sent messages section-->
+  <ng-container *ngIf="!received">
+    <div *ngIf="messagesSent else noMessages">
+      <p-dataView #dv [value]="messagesSent" [paginator]="true" [rows]="20" paginatorPosition="bottom"
+        filterBy="Sender">
+
+        <p-header>
+          <div class="sort-search">
+            <!-- add here sort by and serach by -->
+            <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)"
+        [style]="{'min-width':'15em'}"></p-dropdown> -->
+
+            <p-dropdown class="sort" placeholder="Sort By" [style]="{'min-width':'15em'}"></p-dropdown>
+
+            <input class="search" type="search" pInputText placeholder="Search by sender name"
+              (keyup)="dv.filter($event.target.value)">
+          </div>
+
+        </p-header>
+
+        <ng-template let-message pTemplate="listItem">
+          <p-accordion (onOpen)="[markAsRead($event,message),message.read=true]">
+
+            <p-accordionTab header={{message.subJect}} toggleable="true" collapsed="true">
+              <p-header class="acc-header">
+                {{message.subJect}}
+                <!-- reuse template and entering the variable we want it to work on, here is message-->
+                <!-- <ng-template *ngTemplateOutlet="buttons; context: {$implicit: message}"></ng-template>-->
+
+              </p-header>
+
+
+              <div class="message">
+                <div class="message-details" [ngClass]="{read: message.read}">
+                  <div class="subject">{{message.subJect}}</div>
+                  <div class="reciever">by {{message.recieverId}}</div>
+                  <div class="date">{{message.date}}</div>
+                  <div class="content">{{message.messContent}}</div>
+                </div>
+
+                <!-- reuse template -->
+                <!--  <ng-template *ngTemplateOutlet="buttons; context: {$implicit: message}"></ng-template>-->
+
+              </div> <!-- end of message -->
+            </p-accordionTab>
+          </p-accordion>
+        </ng-template>
+
+      </p-dataView>
+
+    </div>
+
+    <!-- if no message we get here -->
+    <ng-template #noMessages>
+      <p class="no-messages">No messages to show</p>
+    </ng-template>
+  </ng-container>
+
+</section>
+
+
+<p-dialog header="Message reply" [(visible)]="displayDialog" responsive="true" showEffect="fade" modal="true"
+  closeOnEscape="true" dismissableMask="true" appendTo="body" (onAfterHide)="onDialogHide()">
+
+  <div class="form-wrapper" *ngIf="selectedMessage">
+    <!--here e build teaxt area and button to send message to this message.sender-->
+    <form novalidat #reply="ngForm" autocomplete="off" (ngSubmit)="onSubmit($event,selectedMessage)">
+      <div class="form-group">
+        <textarea type="text" #mesVar="ngModel" placeholder="message" id="message" name="message" rows="10"
+          [(ngModel)]="repMessage"></textarea>
+      </div>
+      <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="reply.valid">
+        <input type="submit" [disabled]="!mesVar.dirty" label="send">
+      </div>
+    </form>
+
+  </div>
+</p-dialog>

@@ -1,11 +1,85 @@
 @import "macros";
+@import "colors";
 
-$red :red;
-$green:green;
+//////////////////////////////////////////////////////////////////////////////////
+// screens
+//////////////////////////////////////////////////////////////////////////////////
+// screen limitation
+// @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+// @media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+// @media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+// @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+// @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+// @media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+$desktop-xlarge: 1800px;
+$desktop-large: 1200px;
+$desktop: 960px;
+$tablet: 768px;
+$mobile-large: 640px;
+$mobile: 480px;
+$mobile-small: 360px;
+
+//////////////////////////////////////////////////////////////////////////////////
+// fonts
+//////////////////////////////////////////////////////////////////////////////////
+
+$primary-font-family: helvetica, sans-serif;
+$header-font-family: montserrat, helvetica, sans-serif;
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// scroll bar
+//////////////////////////////////////////////////////////////////////////////////
+$scroll-bar-width: 6px;
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// layout
+//////////////////////////////////////////////////////////////////////////////////
+
+
 
 .main-wrapper{
   width: 80%;
-  margin: 2rem auto;
+  margin: 10rem auto;
   max-width: 1200px;
   border: 2px solid red;
+  opacity: .9;
+
+  @media(max-width: $mobile-large){
+    width: 95%;
+  }
+}
+
+.section {
+  background-color: rgba(255, 255, 255, 1);
+  color: #000;
+  padding: 7rem;
+
+  @media(max-width: $mobile-large){
+    padding: 2rem 1rem;
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////
+// headings
+//////////////////////////////////////////////////////////////////////////////////
+
+.h2-header{
+  font-family: $header-font-family;
+  font-size: 2.2rem;
+  font-weight: normal;
+  margin: 0 0 5rem;
+  color: $text-white;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// matirial
+//////////////////////////////////////////////////////////////////////////////////
+::ng-deep .mat-snack-bar-container {
+  max-width: 300px !important;
+
+  .mat-simple-snackbar {
+    justify-content: center !important;
+  }
 }

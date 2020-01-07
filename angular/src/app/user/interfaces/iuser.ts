@@ -1,19 +1,27 @@
 export interface IUser {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    birthDay: string;
-    userType: string;
-    password: string;
+  fName?: string;
+  lName?: string;
+  email: string;
+  phone?: string;
+  bDay?: string;
+  type?: string;
+  pWord: string;
+  token?: string;
+}
+
+export enum ERole {
+  User = 'Client',
+  Admin = 'Admin',
+  Business = 'Business Owner'
 }
 
 export const emptyUser = (): IUser => ({
-   firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    birthDay: '',
-    userType: '',
-    password: ''
+  fName: '',
+  lName: '',
+  email: '',
+  phone: '',
+  bDay: '',
+  type: 'Client',
+  pWord: '',
+
 });

@@ -1,0 +1,20 @@
+<div class="main-wrapper">
+    <h1>WELCOME TO {{businessName}}</h1>
+    <h1 style="white-space:pre; text-align: center;" #editableHeader contenteditable=[{canEdit}]
+      (input)="bHome.headerText=$event.target.textContent"></h1>
+
+
+    <!-- Just to see that the value is updated every time you change headerText-->
+    <p style="white-space:pre">{{bHome.headerText}}</p>
+    <!--AMIT-->
+    <h2 style="white-space:pre; text-align: center;" #editableSubHeader contenteditable=[{canEdit}]
+      (input)="bHome.subHeaderText=$event.target.innerText"></h2>
+
+
+
+    <article style="white-space:pre; text-align: center;" #editableArtical contenteditable=[{canEdit}]
+      (input)="bHome.articalText=$event.target.innerText"></article>
+<div  *ngIf="canEdit;">
+    <button (click)="saveChanges()">save</button>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<H2>Your Businesses:</H2>
+<business-list [dataForList]="setRequest('thisUser')"></business-list>
+
+<h2>All Businesses</h2>
+<!--AMIT remember: need to exclude business that client register to-->
+<business-list [dataForList]="setRequest('all')"></business-list>
