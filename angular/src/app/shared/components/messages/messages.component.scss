@@ -1,0 +1,228 @@
+@import "../../../scss/base";
+@import "../../../scss/form";
+
+
+///////////////////////////////////////
+// h2-header
+///////////////////////////////////////
+.h2-header {
+
+  color: $text-dark-color;
+
+  .h2-header__received,
+  .h2-header__sent {
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .active-received {
+    color: $text-dark-color;
+    border-bottom: 1px solid currentColor;
+    font-weight: 500;
+  }
+}
+
+///////////////////////////////////////
+// sort & search
+///////////////////////////////////////
+
+.sort-search {
+  .search::placeholder {
+    color: $text-dark-color;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+  .sort,
+  .search,
+  .select {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+///////////////////////////////////////
+// buttons common
+///////////////////////////////////////
+
+.buttons {
+  display: flex;
+  align-self: flex-start;
+
+  i {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+      color: $text-light-color;
+    }
+  }
+}
+
+///////////////////////////////////////
+// accordion header
+///////////////////////////////////////
+::ng-deep p-accordion {
+  width: 100%;
+
+  .ui-accordion-header {
+    margin: 0 !important;
+    position: relative;
+
+    a {
+      width: 100%;
+      display: grid !important;
+      grid-template-columns: auto 1fr;
+      border: none !important;
+
+      border-bottom: 1px solid #ddd !important;
+      background-color: transparent !important;
+      outline: none;
+
+      &:first-of-type {
+        border-top: 1px solid #ddd !important;
+      }
+
+      &:hover {
+        border-bottom: 1px solid $light-gray !important;
+      }
+
+      .acc-header {
+        display: flex;
+
+        .buttons {
+          position: absolute;
+          right: 1em;
+          z-index: 1000; // be over the header to be clicked
+
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        &:hover .buttons {
+          visibility: visible;
+          opacity: 1;
+
+          & i:hover {
+            color: $text-light-color;
+          }
+        }
+
+        @media (max-width: $mobile-large) {
+          &:hover .buttons {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+
+    &.ui-state-active {
+      background-color: $text-light-color;
+      opacity: 0.8;
+
+      .acc-header {
+        .buttons {
+          visibility: hidden !important;
+        }
+      }
+    }
+  }
+}
+
+.read {
+  font-weight: normal;
+}
+
+///////////////////////////////////////
+// Paginator
+///////////////////////////////////////
+::ng-deep p-paginator {
+  .ui-paginator {
+    background-color: #ffffff;
+    border-color: transparent;
+  }
+
+  .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: $text-light-color !important;
+    opacity: 0.7;
+    transition: 0.4s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+///////////////////////////////////////
+// Data View
+///////////////////////////////////////
+::ng-deep .ui-dataview {
+  border: 1px solid $middle-gray; //#333333;
+  padding: 1em;
+
+  .ui-dataview-header {
+    background-color: #fff !important;
+    padding-bottom: 0 !important;
+    border: none !important;
+  }
+
+  .ui-dataview-content {
+    border-color: transparent !important;
+    padding-bottom: 15rem !important;
+    padding-top: 5rem !important;
+  }
+}
+
+///////////////////////////////////////
+// message
+///////////////////////////////////////
+.message {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: $primary-font-family;
+  line-height: 1.5;
+
+  margin: 1.5rem auto;
+
+  .message-details {
+    flex-grow: 1;
+
+    .subject {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .sender {
+      margin: 0.2rem auto 0;
+    }
+
+    .content {
+      margin-bottom: 1rem;
+    }
+
+    .date {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+///////////////////////////////////////
+// reply
+///////////////////////////////////////
+
+::ng-deep .ui-dialog {
+  width: 80%;
+  max-width: 400px;
+
+  .ui-dialog-content {
+    textarea {
+      color: #000;
+    }
+  }
+}
+

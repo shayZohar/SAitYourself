@@ -1,0 +1,35 @@
+@import "../../../scss/form";
+
+form {
+  background: $gray;
+  padding: 1em;
+  max-width: 400px;
+  margin-left: 40%;
+
+  .newUser{
+    cursor: pointer;
+    size: 1px;
+  }
+  @media (max-width: $tablet) {
+    margin-left: 0;
+  }
+}
+
+
+.popup-overlay {
+  overflow: auto;
+  .h2-header {
+    color: $text-very-light-color;
+  }
+  .sign-up {
+    background-color: $gray;
+    width: 80%;
+    max-width: 60rem;
+    top: 10vh;
+    transform: translate(-50%, 0);
+    margin-bottom: 10vh;
+  }
+  .mat-icon {
+    color: $text-very-light-color;
+  }
+}

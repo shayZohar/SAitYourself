@@ -1,0 +1,42 @@
+<h2 class="h2-header">Business Settings</h2>
+<p>Please select the business to manage. Then you can browse or delete it. You can add another owner to the selected business, see and block clients, add/remove gallery and appointment view in the business pages.<br>In addition you can add here another business to your businesses list.</p>
+<div *ngIf="showBusinesses">
+  <business-list [businessListToShow]="getBusinessArray()" (deleteBusiness)="deleteBusiness($event)" [type]="'Business Owner'" (chosenBusiness)="changeCurrentBusiness($event)">
+  </business-list>
+</div>
+
+<!-- adding a new business -->
+<div class="add-business">
+  <button type="button" class="btn light btn-open" (click)="addNewBusiness()">{{addBusinessBtn}}</button>
+
+  <form *ngIf="signNewBusiness" novalidate #sigBusiness="ngForm" autocomplete="off" (ngSubmit)="signUpNewBusiness(newBusiness)">
+
+    <sign-new-business [business]="newBusiness" [userEmail]="currentUser.email" (businessToSign)="newBusiness=$event"></sign-new-business>
+    <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="sigBusiness.valid">
+      <input class="form-group" type="submit" [disabled]="sigBusiness.invalid" label="sign up">
+    </div>
+  </form>
+</div>
+
+<div *ngIf="showChosenBusiness">
+  <business-display [business]="getCurrentBusiness()" (deleteBusiness)="deleteBusiness($event)" (userToShow)="setUserToShow($event)" (close)="closeDisplay()"></business-display>
+</div>
+
+<!-- business users list -->
+<div class="popup-overlay" *ngIf="showSelectedUser">
+  <div class="popup">
+    <mat-icon class="close" material-icons-outlined aria-label="close icon" (click)="showSelectedUser=false">clear</mat-icon>
+
+    <div *ngIf="showSelectedUser && selection.selectedType == 'Business Owner'">
+      <user-display [showUser]="selection.selectedUser" [type]="selection.selectedType" (remove)="removeOwner($event)" (close)="showSelectedUser=!$event"></user-display>
+    </div>
+
+    <div *ngIf="showSelectedUser && selection.selectedType == 'Client'">
+      <user-display [showUser]="selection.selectedUser" [type]="selection.selectedType" (block)="blockClient($event)" (remove)="removeClient($event)" (close)="showSelectedUser=!$event"></user-display>
+    </div>
+
+    <div *ngIf="showSelectedUser && selection.selectedType == 'Blocked'">
+      <user-display [showUser]="selection.selectedUser" [type]="selection.selectedType" (unBlock)="unBlockClient($event)" (close)="showSelectedUser=!$event"></user-display>
+    </div>
+  </div>
+</div>

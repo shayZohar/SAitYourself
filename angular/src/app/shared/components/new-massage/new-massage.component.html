@@ -1,0 +1,14 @@
+  <form novalidate #sendMessage="ngForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="form-group">
+      <textarea type="text" #subjectVar="ngModel" placeholder="subject" id="subject" name="subject" rows="2" [(ngModel)]="data.subJect"></textarea>
+    </div>
+    <div class="form-group">
+      <textarea type="text" #mesVar="ngModel" required placeholder="message" id="message" name="message" rows="10" [(ngModel)]="data.messContent"></textarea>
+    </div>
+    <!-- div is workaround to show tooltip on disabled button -->
+    <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="sendMessage.valid">
+      <input type="submit" [disabled]="sendMessage.invalid" label="send" value="send">
+    </div>
+
+    <mat-icon class="close" material-icons-outlined aria-label="close icon" (click)="close()">clear</mat-icon>
+  </form>

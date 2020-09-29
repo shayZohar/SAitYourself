@@ -1,0 +1,54 @@
+
+
+<form novalidate #updateUser="ngForm" autocomplete="nope">
+  <div class="form-group short-col">
+    <input to type="text" #firstNameVar="ngModel" required placeholder="first name *" id="fName" name="fName" [(ngModel)]="user.fName" pattern="^[a-zA-Z]+$">
+
+    <!-- validate first name-->
+    <div *ngIf="firstNameVar.invalid && (firstNameVar.dirty || firstNameVar.touched)" class="errors">
+      <div *ngIf="firstNameVar?.errors?.required">
+        First name is required
+      </div>
+      <div *ngIf="firstNameVar?.errors?.pattern">
+        Letters only
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group short-col">
+    <input type="text" #lastNameVar="ngModel" required placeholder="last name *" id="ltName" name="ltName" [(ngModel)]="user.lName" pattern="^[a-zA-Z]+$">
+    <!-- validate last name-->
+    <div *ngIf="lastNameVar?.invalid && (lastNameVar.dirty || lastNameVar.touched)" class="errors">
+      <div *ngIf="lastNameVar?.errors?.required">
+        Last name is required
+      </div>
+      <div *ngIf="lastNameVar?.errors?.pattern">
+        Letters only!
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <input type="text" #phoneVar="ngModel" placeholder="phone number" autocomplete="nope" id="phone" name="phone" [(ngModel)]="user.phone" pattern="^\d{2,3}-\d{7}$">
+    <!-- validate phone -->
+    <div *ngIf="phoneVar?.invalid && (phoneVar.dirty || phoneVar.touched)" class="errors">
+      Formats: 12-1234567 or 123-1234567
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="date" #birthDayVar="ngModel" placeholder="birthday" id="bDay" name="bDay" [(ngModel)]="birthDay">
+    <div *ngIf="birthDayVar?.invalid && (birthDayVar.dirty || birthDayVar.touched)" class="errors">
+    </div>
+  </div>
+
+
+  <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="updateUser.valid">
+    <input type="submit" (click)="save()" [disabled]="updateUser.invalid" value="Save">
+  </div>
+
+
+  <mat-icon class="close" material-icons-outlined aria-label="personal zone icon" (click)="close()">clear</mat-icon>
+</form>

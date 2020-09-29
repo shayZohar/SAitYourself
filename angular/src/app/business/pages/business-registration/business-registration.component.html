@@ -1,0 +1,11 @@
+<div class="main-wrapper">
+  <div class="form-wrapper">
+    <div class="links">
+      <!-- login will appear only if user is not connected to system-->
+      <a *ngIf="currentUser?.type === 'Unsigned User'" [routerLink]="'login'" [routerLinkActive]="'router-link-active'" (click)="onActive('login')">Login</a>
+      <a *ngIf="currentUser?.type" [routerLink]="'sign-up'" [routerLinkActive]="'router-link-active'" (click)="onActive('signin')">Sign-Up</a>
+    </div>
+  <p class="form-header">{{headerText}}</p>
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+@import "../../../scss/base";
+
+$text-color: $text-very-light-color;
+$bg-color: $gray;
+$link-bg-color: lighten($bg-color, 10%);
+$link-active-bg-color: $bg-light-color;
+$link-active-text-color: $text-dark-color;
+
+:host {
+  width: 100%;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $bg-color;
+
+  .links {
+    display: flex;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 3px;
+
+    a {
+      background-color: $link-bg-color;
+      font-family: $header-font-family;
+      &:hover {
+        background-color: lighten($link-bg-color, 10%);
+      }
+
+      flex: 1 1 50%;
+      padding: 1rem;
+      color: $text-color;
+      text-decoration: none;
+      transition: background-color 0.5s, color 0.5s;
+
+      &.router-link-active {
+        background-color: $link-active-bg-color;
+        color: $link-active-text-color;
+
+        &:hover {
+          background-color: darken($link-active-bg-color, 10%);
+          color: $text-color;
+        }
+      }
+    }
+  }
+
+  .form-header {
+    font-family: $header-font-family;
+    text-align: center;
+    color: $text-color;
+    font-size: 2rem;
+    padding: 3.5rem;
+    letter-spacing: 3px;
+  }
+}

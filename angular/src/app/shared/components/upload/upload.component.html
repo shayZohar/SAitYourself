@@ -1,0 +1,66 @@
+<!--if in the business owner mode, have the ability to upload images-->
+<div *ngIf="isOwner">
+  <h2 class="h2-header">Images Upload</h2>
+  <p class="text">Choose image/images you want to be shown in your gallery. The images will be displayed below. Your clients will see them.</p>
+
+
+  <p-fileUpload name="demo[]" url="http://localhost:5000/api/Upload/file?bName={{bName}}" (onUpload)="onUpload($event)"
+    multiple="multiple" accept="image/*" maxFileSize="1000000">
+    <ng-template pTemplate="content">
+      <div class="files-uploaded" *ngIf="uploadedFiles?.length > 0">
+        <p>{{uploadedFiles.length}} files uploaded:</p>
+        <ul>
+          <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+      </div>
+    </ng-template>
+  </p-fileUpload>
+
+
+  <!--Gallery section-->
+  <h2 class="h2-header">Gallery</h2>
+  <ng-container *ngIf="receivedFiles?.length !== 0; else noFiles">
+
+
+    <!--in business owner mode-->
+    <div class="gallery-buttons">
+      <button class="btn light" (click)="deleteSelected()">Delete Selected</button>
+      <button class="btn light" (click)="chooseAll()">{{selectStr}}</button>
+    </div>
+
+
+
+    <!--images view-->
+    <section class="gallery">
+      <figure class="image" *ngFor="let image of receivedFiles">
+
+        <img src="http://localhost:5000/Resources/Images/{{bName}}/{{image.fileName}}" alt="{{image}}"
+        lightbox >
+
+        <mat-checkbox (change)="addRemoveFiles(image)" [ngModel]="selectAll"></mat-checkbox>
+
+      </figure>
+    </section>
+
+    </ng-container>
+    <ng-template #noFiles>
+      <p class="no-files">Your gallery is empty</p>
+    </ng-template>
+
+  </div>
+
+  <!--if user is not the business owner or cannot edit, just viewing the images uploaded-->
+  <div *ngIf="!isOwner">
+    <ng-container *ngIf="receivedFiles">
+      <h2 class="h2-header client">Gallery</h2>
+
+      <section class="gallery">
+        <figure class="image" *ngFor="let image of receivedFiles">
+
+          <img src="http://localhost:5000/Resources/Images/{{bName}}/{{image.fileName}}"
+          alt="{{image}}" lightbox>
+        </figure>
+      </section>
+
+    </ng-container>
+</div>

@@ -1,0 +1,145 @@
+<div class="main-wrapper" *ngIf="user">
+
+  <section class="drawer-container">
+
+
+     <!-- info-->
+     <div class="btn-info special" (click)="showDialog()" label="Help">
+      <mat-icon material-icons-outlined aria-label="info">help_outline</mat-icon>
+    </div>
+    <p-dialog header="Help" [(visible)]="display" [style]="{width: '400px'}">
+      <div *ngIf="user.type == 'Business Owner'">
+        <br><br>
+        Profile:
+        <br>
+        1. You can edit your personal info.
+        <br>
+        2. You can select your user type to work with (if you are a business-owner and client of other business)
+        <br><br>
+        personal messages:
+        <br>
+        You can view your personal messages, your sent messages and reply to recieved messages.
+        <br><br>
+        Settings:
+        <br>
+        1. You can select your business from the list to work on it.
+           After selecting a business, clicking on 'Browse' will navigate you to your site.
+           <br>
+        2. You can add or delete your businesses.
+        3. After selecting your business, you can edit it's requirments(gallery and appointment pages) and
+           add owner(s) to the site to help you manage it.
+           <br>
+        4. You can view the business client-list and send message to specific client,
+           block or remove a client from your site.
+           <br><br>
+
+      </div>
+      <div *ngIf="user.type == 'Client'">
+        <br><br>
+        Profile:
+        <br>
+        1. You can edit your personal info.
+        <br>
+        2. You can select your user type to work with (if you are a business-owner and client of other business)
+        <br><br>
+        personal messages:
+        <br>
+        You can view your personal messages, your sent messages and reply to recieved messages.
+        <br><br>
+        Settings:
+        <br>
+        1. You can select a business from the list of businesses you are registered to.<br>
+           After selecting a business, clicking on 'Browse' will navigate you to your site.
+           <br>
+        2. You can unsign yourself from a business.
+        3. If you wish to sign-up to a different business, navigate to the site's home page,<br>
+           find the desired business from businesses list in home page and sign-up to it.
+
+           <br><br>
+
+      </div>
+    </p-dialog>
+
+    <section class="drawer__side-nav">
+
+
+      <button type="button" class="btn dark" [ngClass]="{'active': show['profile']}"
+        (click)=" displayContent('profile')">Profile</button>
+      <button type="button" class="btn dark" [ngClass]="{'active': show['messages']}" [matBadge]="unredCount"
+        [matBadgeHidden]="unredCount <= 0" matBadgePosition="above before" matBadgeOverlap="false" matBadgeSize="small"
+        (click)="displayContent('messages')" name="userMessages">
+        Personal<br>Messages</button>
+      <button type="button" class="btn dark" [ngClass]="{'active': show['settings']}"
+        (click)="displayContent('settings')">Settings</button>
+
+
+    </section>
+
+    <section class="drawer__content">
+      <user-display [showUser]="user" [uTypes]="uTypes" [type]="'Prime'" *ngIf="show['profile']"></user-display>
+
+      <div *ngIf="show['messages']">
+        <sh-messages [messagesRec]="resMessages | async" [messageFor]="'user'" [messagesSent]="senMessages | async"></sh-messages>
+      </div>
+
+      <div *ngIf="show['settings']">
+        <div *ngIf="user.type === 'Admin'">
+          <admin-personal-zone (removeType)="removeType($event)"></admin-personal-zone>
+        </div>
+
+        <div *ngIf="user.type === 'Business Owner'">
+
+          <owner-personal-zone (removeType)="removeType($event)"></owner-personal-zone>
+        </div>
+        <div *ngIf="user.type === 'Client'">
+          <client-personal-zone (removeType)="removeType($event)" (addType)="addType($event)" ></client-personal-zone>
+        </div>
+      </div>
+    </section>
+  </section>
+
+
+  <!--
+
+<div class="main-wrapper" *ngIf="user">
+  <user-display [showUser]="user" [type]="'Prime'"></user-display>
+  <div *ngIf="uTypes.length > 0">
+    <mat-form-field>
+      <mat-label>{{user.type}}</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let type of uTypes" [value]="type" (onSelectionChange)="changType(type)">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br><br>
+  <button class="clickable"
+        [matBadge]="unredCount"
+       [matBadgeHidden]="unredCount <= 0"
+       matBadgePosition="above before"
+       matBadgeOverlap="false"
+       matBadgeSize="small"
+      (click)="messagesDisplay()"
+      name="userMessages">
+      {{messageText}}</button>
+  <div *ngIf="showMessages">
+    <sh-messages [messagesRec]="resMessages | async" [messagesSent]="senMessages | async"></sh-messages>
+  </div>
+  <div class="lists">
+
+    <div *ngIf="user.type === 'Admin'">
+      <admin-personal-zone (removeType)="removeType($event)"></admin-personal-zone>
+    </div>
+
+    <div *ngIf="user.type === 'Business Owner'">
+
+      <owner-personal-zone (removeType)="removeType($event)"></owner-personal-zone>
+    </div>
+    <div *ngIf="user.type === 'Client'">
+      <client-personal-zone (removeType)="removeType($event)"></client-personal-zone>
+    </div>
+
+  </div>
+</div> -->

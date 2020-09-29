@@ -1,0 +1,225 @@
+@import "../../../scss/base";
+
+
+$font-size: 1.3rem;
+$font-family: $primary-font-family;
+
+:host {
+  width: 100%;
+  background-color: $bg-very-light-color;
+}
+
+h1,
+h2 {
+  font-family: $primary-font-family;
+}
+
+h1 {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.title-wrapper {
+  background: $bg-gradient;
+  height: 90vh;
+  padding: 8vh 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    max-width: 800px;
+
+    @media (max-width: $mobile) {
+      max-width: 300px;
+    }
+    @media (orientation: landscape) and (max-width: $tablet) {
+      max-width: 400px;
+    }
+
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      @media (orientation: landscape) and (max-width: $tablet) {
+        max-width: 200px;
+      }
+    }
+    h1 {
+      font-size: 4.5rem;
+
+      font-style: italic;
+      color: $text-light-color;
+      text-align: center;
+      text-transform: capitalize;
+
+      margin-top: 0;
+      @media (min-width: $desktop) {
+        font-size: 5rem;
+        margin-top: -3rem;
+      }
+      @media (max-width: $mobile-large) {
+        font-size: 3.5rem;
+      }
+      @media (max-width: $mobile) {
+        font-size: 2.9rem;
+      }
+      @media (orientation: landscape) and (max-width: $mobile-large) {
+        font-size: 2.9rem;
+      }
+    }
+  }
+}
+
+.home {
+  min-height: 100vh;
+  color: $body-text-color;
+  font-family: $font-family;
+  background-color: $bg-very-light-color;
+  position: relative;
+  padding: 10vh 0 7rem;
+}
+
+// empty trapez
+.home::after {
+  content: "";
+  position: absolute;
+
+  border-bottom: 5rem solid $bg-very-light-color; // height
+  border-left: 3.5rem solid transparent; // age
+  border-right: 0 solid transparent;
+  height: 0;
+  right: 0;
+  top: -4.5rem;
+  width: 30%;
+}
+
+.main-wrapper {
+  color: $text-dark-color;
+  margin: 0 auto;
+  border: unset;
+
+  section {
+    margin: 3rem 0 4rem;
+  }
+
+  h2,
+  h3 {
+    font-size: 3rem;
+    text-align: center;
+    color: $text-dark-color;
+    text-transform: capitalize;
+    padding-bottom: 1em;
+  }
+
+  h3 {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  p {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+  }
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .team-img {
+    display: block;
+    border-radius: 50%;
+    max-width: 200px;
+    margin: auto;
+  }
+}
+
+.form-wrapper {
+  //////////////////////////////////////////////////////////////////////////////////
+  // formfield from material
+  //////////////////////////////////////////////////////////////////////////////////
+
+  margin-top: 2rem;
+
+  ::ng-deep .mat-form-field {
+    padding-bottom: 2em;
+
+    .mat-form-field-wrapper {
+      background: transparent;
+    }
+    .mat-select-placeholder {
+      margin-bottom: 1rem;
+    }
+
+    .mat-form-field-underline {
+      background-color: $text-dark-color;
+    }
+
+    .mat-select-value,
+    .mat-form-field-label,
+    .mat-error {
+      font-size: $font-size;
+      font-family: $font-family;
+      color: $text-dark-color;
+      letter-spacing: initial;
+      opacity: 1;
+    }
+
+    .mat-select-arrow-wrapper .mat-select-arrow {
+      border-top-color: $text-dark-color;
+    }
+
+    .mat-form-field-ripple {
+      background-color: $text-dark-color;
+    }
+
+    .mat-form-field-required-marker {
+      color: $text-dark-color;
+    }
+  }
+
+  ::ng-deep .mat-form-field.mat-focused {
+    .mat-form-field-label {
+      color: $text-dark-color;
+    }
+    .mat-form-field-underline {
+      background-color: $text-dark-color;
+    }
+
+    .mat-form-field-ripple {
+      background-color: $text-dark-color;
+    }
+  }
+}
+
+.go-down {
+  display: block;
+
+  position: fixed;
+  bottom: 9vh;
+  right: 2%;
+  width: 0;
+  height: 0;
+
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid $bg-dark-color;
+
+  z-index: 100;
+}
+
+::ng-deep
+  .mat-autocomplete-panel
+  .mat-option.mat-selected:not(.mat-active):not(:hover):not(.mat-option-disabled),
+::ng-deep .mat-autocomplete-panel.mat-autocomplete-visible {
+  background-color: $bg-special-color;
+  color: $text-very-light-color;
+}

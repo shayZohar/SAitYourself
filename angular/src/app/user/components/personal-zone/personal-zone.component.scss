@@ -1,0 +1,54 @@
+@import "../../../scss/base";
+
+:host {
+  width: 100%;
+}
+
+.drawer-container {
+  width: 100%;
+  display: flex;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
+
+  border: 1px solid $middle-gray;
+  box-shadow: 3px 3px 8px $middle-gray;
+
+  font-family: $primary-font-family;
+  font-size: 1.6rem;
+
+  .drawer__side-nav {
+    border-right: 1px solid $middle-gray;
+    box-shadow: 3px 0 17px $middle-gray;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 2em;
+
+    .btn {
+      margin: 1rem;
+      line-height: 1.5;
+
+      &.active {
+        background: $bg-light-color;
+        color: $text-dark-color;
+      }
+    }
+  }
+
+
+  .drawer__content {
+    flex: 1;
+
+    padding: 2em;
+
+    align-self: center;
+    @media (max-width: $tablet) {
+      align-self: flex-start;
+      flex-grow: 0;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="pick-user" *ngIf="usersListToShow !== undefined && type !== undefined">
+  <!-- users autocomplete list -->
+  <mat-form-field>
+    <input matInput type="text" [matAutocomplete]="auto" autocomplete="off" placeholder="Pick User" aria-label="User"
+      name="business" [(ngModel)]="testUser" #businessVar="ngModel" (ngModelChange)="doFilter()">
+    <mat-autocomplete name="chosen" #auto="matAutocomplete" autocomplete="off" [displayWith]="displayProperty"
+      (optionSelected)="selected($event)">
+      <mat-option *ngFor="let user of filteredUsers" [value]="user">
+        {{user.fName +' '+ user.lName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

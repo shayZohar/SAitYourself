@@ -1,0 +1,64 @@
+
+
+This try will be done with admin module.
+Later do it for business and other modules that require authenticated user only
+
+Look in the code by:
+ AUTH-ADDED n
+for item n
+Ex AUTH-ADDED 1 will find prepration stage code
+
+
+1 - Preparations
+----------------
+
+1.1  Define user data
+    in iuser.ts
+    -  define ERole enumerable - defines logged in roles like admin/business/regular
+    -  add additional fields in IUser and emptyUser for role and token
+
+1.2  Define admin module and open home admin page. it is our test for guarding. we can get there only if admin was logged in
+    In admin folder:
+    - pages/admin-home/admin.component
+    - services/admin.service.ts
+    - nav-links.ts with admin navigation links
+    - admin.module.ts and admin-routing.module.ts
+
+1.3 Remove AdminHomeComponent from AppModule
+
+2 - Handle token
+----------------
+
+2.1  Define authentication.service.ts in authentication folder
+    - Add login here instead of http- .... For valid user, the token will be stored in the local storage
+    - remove from home-login.component token storage. it is done in authentication service
+
+2.2  Defined JWT Interceptor to add the token to every http request after successful login.
+    - Add in core/interceptors jwt.interceptor.ts
+    - Add provide in coreModule
+
+
+3 - Guarding
+------------
+
+3.1  In core/guards define auth.guard.ts
+    - define canActivate according to currentUser role. will be user in routing modules
+    - add guarding in admin routing module
+
+
+4 - Add logout
+--------------
+
+4.1  header.component.ts and html
+    - add handling of current user by subscribing to authentication service user change
+    - add logout method
+    - add currentUser to navMain component in header.component.html
+
+4.2 shared/navMain
+    - in nav-main.component.html add logout link if currentUser
+    - in nav-main-component.ts addas @input currentUser and logout emit
+
+5 - General - not related
+-------------------------
+
+5.1   In home.component.ts call to homeService.init instead of navbarService

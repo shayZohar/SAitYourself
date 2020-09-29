@@ -1,0 +1,37 @@
+<!-- all users autocomplete list -->
+<div *ngIf="showUsers">
+  <h2 class="h2-header">Users</h2>
+  <div class="users">
+    <h3>Total {{usersCount}} users:</h3>
+    <users-list *ngIf="checkAllUsers(); else noUsers" class="list" [usersListToShow]="getUsersArray('All')"
+      (listLength)="usersCount=$event" [type]="'All'" [placeHolder]="'User'" (selectedUser)="selected($event,'All')">
+    </users-list>
+    <ng-template #noUsers>
+      <p>no users listed on website</p>
+    </ng-template>
+  </div>
+</div>
+
+<!-- all businesses autocomplete list -->
+<div class="popup-overlay" *ngIf="showSelectedUser">
+  <div class="popup">
+    <mat-icon class="close" material-icons-outlined aria-label="close icon" (click)="showSelectedUser=false">clear
+    </mat-icon>
+    <div *ngIf="showSelectedUser && selection.selectedType == 'All'">
+      <user-display (remove)="removeUser($event)" [showUser]="selection.selectedUser" [type]="selection.selectedType"
+        (close)="showSelectedUser=!$event"></user-display>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showBusinesses">
+  <h2 class="h2-header">Businesses</h2>
+  <business-list [businessListToShow]="getBusinessArray()" (deleteBusiness)="deleteBusiness($event)" [type]="'Admin'"
+    (chosenBusiness)="changeBusiness($event)">
+  </business-list>
+</div>
+
+<business-display *ngIf="showChosenBusiness" [type]="'Admin'" [business]="getCurrentBusiness()"
+  (userToShow)="setUserFromBusinessToShow($event)" (close)="closeDisplay($event)">
+</business-display>

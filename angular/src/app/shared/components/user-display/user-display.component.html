@@ -1,0 +1,53 @@
+<section *ngIf="user; else noEmail" class="container">
+ <!-- user personal details -->
+  <h2 class="h2-header">{{user.lName}} {{user.fName}}</h2>
+
+
+  <p *ngIf="user?.email && user.email !== ''">
+    <span> Email: </span> <span>{{user.email}}</span>
+  </p>
+  <p *ngIf="user?.type && user.type !== ''">
+    <span> Type: </span> <span>{{user.type}}</span>
+  </p>
+  <p *ngIf="user?.phone && user.phone !== ''">
+    <span> Phone: </span> <span>{{user.phone}}</span>
+  </p>
+  <p *ngIf="user?.bDay !== 0">
+    <span>Birth Day:</span> <span> {{birthDay}}</span>
+  </p>
+
+  <p *ngIf="user?.lastSeen > 0">
+    <span>Last Seen:</span> <span>{{lastSeenDate}}</span>
+  </p>
+
+  <!-- user types dropdown list-->
+  <div class="types" *ngIf="type == 'Prime' && uTypes.length > 1">
+    <span>Change Type:</span>
+    <mat-form-field>
+      <mat-label>{{user.type}}</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let type of uTypes" [value]="type"
+        (onSelectionChange)="changType(type)">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="buttons" *ngIf="type !== undefined && type !== 'Prime'">
+    <button class="btn light remove" *ngIf="(type !== 'Blocked' && ownerConnected)" (click)="removeUser(user.email)">Remove</button>
+    <button class="btn light" *ngIf="type === 'Client' && ownerConnected" (click)="blockClient(user.email)">Block</button>
+    <button class="btn light" *ngIf="type === 'Blocked' && ownerConnected" (click)="unBlockUser(user.email)">Unblock</button>
+    <button *ngIf="type !== 'Prime' && ownerConnected" class="btn light" (click)="openMessageDialog()">Send Message</button>
+  </div>
+
+<!-- edit user details-->
+  <div class="buttons">
+    <button type="button" class="btn light edit edit-profile" *ngIf="type === 'Prime'" (click)="openEditUser()">Edit</button>
+  </div>
+
+</section>
+<ng-template #noEmail>
+  <h2>No email available </h2>
+</ng-template>
+

@@ -1,0 +1,43 @@
+<div class="fields" #signBusiness="ngModelGroup" [(ngModelGroup)]="business">
+
+
+
+
+  <div class="form-group">
+    <input type="text" autocomplete="nope" #businessName="ngModel" required placeholder="business name *" id="bName" name="bName" [(ngModel)]="business.bName" pattern="^\w[\W\w\s]*$" (change)="isValid(signBusiness)">
+
+    <!-- validate business type -->
+    <div *ngIf="businessName?.invalid && (businessName.dirty || businessName.touched)" class="errors">
+      <div *ngIf="businessName?.errors?.required">
+        Bussiness Name is required
+      </div>
+      <div *ngIf="businessName?.errors?.pattern">
+        Letters and digits only
+      </div>
+    </div>
+  </div>
+
+  <!--business email-->
+  <div class="form-group">
+    <input type="email" #emailVar="ngModel" required placeholder="business email *" id="email" name="email" [(ngModel)]="business.bMail" autocomplete="nope" pattern="^([\w_\-\.]+)@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$" matTooltip="ex. amit@gmail.com" matTooltipPosition="above" [matTooltipDisabled]="emailVar.valid" (change)="isValid(signBusiness); checkEmail()">
+
+    <!-- validate email -->
+    <div *ngIf="emailVar?.invalid && (emailVar.dirty || emailVar.touched)" class="errors">
+      <div *ngIf="emailVar?.errors?.required">
+        Email is required
+      </div>
+      <div *ngIf="emailVar?.errors?.pattern">
+        Complete email
+      </div>
+    </div>
+  </div>
+
+
+  <fieldset>
+    <legend>View Settings</legend>
+    <mat-checkbox #haveApointment="ngModel" [(ngModel)]="business.bAppointment" name="Appointment" [checked]="business.bAppointment">Scheduler</mat-checkbox>
+    <mat-checkbox #haveGallery="ngModel" [(ngModel)]="business.bGallery" name="Appointment" [checked]="business.bGallery">Gallery</mat-checkbox>
+  </fieldset>
+
+
+</div>

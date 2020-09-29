@@ -1,0 +1,80 @@
+<!-- This is the main home-page of the system-->
+<a class="go-down" [routerLink]="['/home']" fragment="search" matTooltip="search business"></a>
+
+<section class="title-wrapper">
+  <div class="title">
+
+    <img *ngIf="startLogoAnim; else noAnim" src="/assets/images/logo-anim.svg" alt="logo-anim">
+    <ng-template #noAnim>
+      <img src="/assets/images/logo-no-anim.svg" alt="logo">
+    </ng-template>
+
+    <h1>take your business to<br>the next level</h1>
+  </div>
+</section>
+
+<section class="home">
+  <div class="main-wrapper">
+
+    <section>
+      <h2>About Us</h2>
+
+      <p>This site is designed to give you, the business-owner, a quick and friendly platform to build your very owned
+        business site!
+
+        With a very few clicks, you will be able to manage your business schdular, interact with your clients and give
+        them all the information they need to know.</p>
+      <p>You can also manage your own work gallery, to show your client your beautiful products. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto in harum nulla neque error recusandae expedita? Minima, repellat voluptate. Perferendis! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto quasi cupiditate dolorum asperiores ipsam iste vero a accusamus quas omnis.</p>
+    </section>
+    <section>
+      <h2>Our team</h2>
+      <p>We are the great team consisting of two programmers: Shay Zohar and Amit Kakoun. The two of us studied together for a Practical Engineer degree in the Technion.</p>
+
+      <img class="team-img" src="/assets/images/shay.jpg" alt="shay">
+      <h3>Shay</h3>
+      <p>Shay is our 34 years old developer, who build this web-site from scratch, and is running this site along with
+        Amit.
+        Shay studied 2 years at Handassaim school of the technion, and graduated in 2019</p>
+      <p>Currently Shay is working at BCI Barav computers</p>
+
+      <img class="team-img" src="/assets/images/amit.jpg" alt="amit">
+      <h3>Amit</h3>
+      <p>Amit is our 31 years old developer, who build this web-site from scratch, and is running this site along with
+        Shay.</p>
+      <p>Amit studied 2 years at Handassaim school of the technion, and graduated in 2019.</p>
+    </section>
+    <section>
+
+      <h2>How to</h2>
+
+      <p>You can navigate to our current business-owner's sites right below and see for yourself what your site can look like.</p>
+
+      <p>When signing-up, your will be asked to set your initial site setting (You can change them at any time from your 'Personal-zone').
+        After logging in- you could start entering content to your site, invite clients to join in, manage your personal gallery, send and recieve messages
+        and manage your business schedular!
+      </p>
+
+    </section>
+    <section>
+
+      <!-- business list to search and navigate to-->
+      <h2 id="search">Search for Business</h2>
+
+      <p>You can choose here the business already online. Please choose one from the below list and you will be redirected to this site. We
+        suggest to explore and register.</p>
+
+      <div class="form-wrapper">
+        <mat-form-field>
+          <mat-label>Our Sites</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option *ngFor="let b of bArr" [value]="b.bName" (click)="goToSite(b)">
+              {{b.bName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </section>
+
+  </div>
+</section>

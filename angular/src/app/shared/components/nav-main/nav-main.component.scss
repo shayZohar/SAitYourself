@@ -1,24 +1,142 @@
+@import "../../../scss/base";
+
+
+
+$link-active-bg-color: $bg-light-color;
+$link-active-text-color: $text-dark-color;
+
 nav {
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw; // prevent shifting with scroll
+  padding: 1em 4rem;
+
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: $mobile-large) {
+    .desktop-nav {
+      display: none;
+    }
+    .mobile-nav {
+      display: flex;
+    }
+  }
+
   display: flex;
-  justify-content: center;
+  background: $bg-gradient;
 
-  ul {
+  @media (max-width: $mobile-large) {
+    justify-content: space-around;
+  }
+
+  .logo {
+    width: 60px;
     display: flex;
+    align-items: center;
+    margin-right: auto;
+    cursor: pointer;
 
-    li {
-      border: 2px solid blue;
-      font-size: 1rem;
-      list-style: none;
+    img {
+      display: block;
+      width: 100%;
+      padding: 5px;
+    }
+  }
 
-      a {
-        text-decoration: none;
-        padding: 3px;
-        border: 2px solid blue;
-        &.active{
-          background-color: red;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: $text-light-color;
+  }
+
+  ::ng-deep .mat-tab-nav-bar {
+
+    border-color: transparent;
+
+    .mat-tab-links {
+      .mat-tab-link {
+        width: unset;
+        color: $link-color;
+        font-family: $header-font-family;
+        font-size: 1.5rem;
+        font-weight: 400;
+        cursor: pointer;
+        z-index: 10;
+        transition: 0.5s;
+        opacity: 1;
+        // padding: 0 1em !important;
+        min-width: auto;
+
+        &.mat-tab-disabled {
+          opacity: 0.7;
+          cursor: crosshair;
         }
+
+        &:hover {
+          color: $text-light-color;
+        }
+
+        &.active,
+        &.mat-tab-label-active {
+          color: $link-active-text-color;
+          background-color: $link-active-bg-color;
+          border-radius: 3px;
+          &:hover {
+            color: $text-very-light-color;
+          }
+        }
+
+        @media (max-width: $tablet) and (min-width: $mobile-large) {
+          padding: 0 1em;
+        }
+      }
+
+      .mat-ink-bar {
+        // background-color: $text-light-color;
+        // height: 2px;
+        // height: 100%;
+        // z-index: 0;
+        // // bottom: 10px;
+        // border-radius: 3px;
+        display: none;
       }
     }
   }
+
+  .mobile-nav {
+    &:focus,
+    &:active {
+      opacity: .7;
+      outline-color: transparent;
+    }
+    button {
+      color: $bg-very-light-color;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+  }
+}
+
+::ng-deep .mat-menu-item span,
+::ng-deep .mat-menu-item a  {
+  font-family: $primary-font-family;
+  font-size: 1.4rem !important;
+  color: $text-very-light-color !important;
+  letter-spacing: 1.5px;
+  font-weight: 100;
+}
+
+
+
+::ng-deep .mat-menu-content {
+  background: $bg-dark-color;
 }

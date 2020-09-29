@@ -1,0 +1,15 @@
+@import "../../../scss/form";
+
+
+.add-business {
+  margin: 2rem 0 0 40%;
+  @media (max-width: $desktop) {
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+  form {
+    background: $gray;
+    padding: 1em;
+    max-width: 400px;
+  }
+}

@@ -1,0 +1,107 @@
+@import "../../scss/business";
+@import "../../../scss/form";
+
+.selections {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  @media (max-width: $desktop) {
+    flex-direction: column;
+
+    .save {
+      align-self: flex-start;
+      width: 300px;
+      text-align: center;
+    }
+  }
+
+  section {
+    display: flex;
+    @media (max-width: $desktop) {
+      height: 50px;
+      margin: 1rem 0;
+      align-self: flex-start;
+      width: 300px;
+    }
+
+    label{
+      background: $bg-gradient;
+      padding: .5em;
+      color: #fff;
+
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      @media (max-width: $desktop) {
+        width: 100%;
+        width: 100px;
+      }
+
+    }
+    & :not(label) {
+      flex-grow: 1;
+    }
+  }
+}
+
+
+
+::ng-deep .ui-calendar,
+::ng-deep .ui-multiselect  {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+::ng-deep .ui-inputtext,
+::ng-deep .ui-multiselect .ui-multiselect-label {
+  width: auto !important;
+  height: 100%;
+
+  border-radius: 0 !important;
+  outline-color: transparent !important;
+}
+
+@media (max-width: $desktop) {
+  ::ng-deep .ui-calendar,
+  ::ng-deep .ui-inputtext {
+    width: 100% !important;
+  }
+}
+
+
+.message {
+  margin-bottom: 2rem;
+}
+.request {
+  margin: 2rem 0 4rem;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    margin-right: 3rem;
+    font-size: 1.6rem;
+
+    span {
+      font-weight: bolder;
+      display: block;
+      margin-bottom: 1em;
+      text-transform: capitalize;
+    }
+
+  }
+  .delete {
+    align-self: center;
+  }
+}
+
+::ng-deep .e-appointment {
+  background: $bg-light-color !important;
+}
+
+
+
+::ng-deep .ui-dropdown.ui-dropdown-clearable .ui-dropdown-label {
+  width: 260px !important;
+}

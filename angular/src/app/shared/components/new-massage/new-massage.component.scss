@@ -1,0 +1,23 @@
+
+@import "../../../scss/form";
+
+form {
+  position: relative;
+}
+
+.btn {
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  top: -2.2rem;
+  right: -2.2rem;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+

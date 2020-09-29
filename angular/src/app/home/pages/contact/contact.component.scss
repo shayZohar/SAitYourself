@@ -1,0 +1,67 @@
+@import "../../../scss/base";
+
+@import "../../../scss/form";
+
+$text-color: $text-white;
+$bg-color: $gray;
+
+:host {
+  width: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.text-wrapper {
+  font-size: 1.6rem;
+  flex-basis: 25rem;
+
+  p {
+    margin-bottom: 4rem;
+    width: 80%;
+    line-height: 1.5;
+  }
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  padding: 2rem;
+  background-color: $bg-color;
+
+
+  form {
+    grid-template-columns: repeat(2, 1fr);
+
+
+    div:not(.short-col),
+    fieldset {
+      grid-column: 1/-1;
+    }
+
+    @media(max-width: $tablet) {
+      .short-col {
+        grid-column: 1/-1;
+      }
+    }
+  }
+
+}
+
+.h2-header {
+  color: $text-very-light-color;
+  text-align: center;
+
+  padding: 1rem;
+  background-color: lighten($bg-color, 10%);
+}

@@ -1,0 +1,37 @@
+
+<div class="main-wrapper">
+
+  <h1 class="bus-header">
+    <span>{{businessName}}</span>
+  </h1>
+    <!--editable section for connected owner -->
+  <h2 class="bus-sub-header" #editableHeader [attr.contenteditable]="canEdit"
+    (input)="bAbout.headerText=$event.target.textContent; onEditMode = true;"></h2>
+  <h3 class="bus-sub-sub-header" #editableSubHeader [attr.contenteditable]="canEdit"
+    (input)="bAbout.subHeaderText=$event.target.innerText; onEditMode = true"></h3>
+  <p class="bus-text" #editableArtical [attr.contenteditable]="canEdit"
+    (input)="bAbout.articalText=$event.target.innerText; onEditMode = true"></p>
+
+  <p class="bus-text" #editableAddress [attr.contenteditable]="canEdit"
+    (input)="bAbout.addressText = $event.target.innerText; onEditMode = true"></p>
+<!--if owner is premitted to edit the page-->
+  <div *ngIf="canEdit" class="edit-buttons">
+    <button class="btn dark" (click)="saveChanges()" [ngClass]="{disabled: !onEditMode}" matTooltip="nothing to save" matTooltipPosition="below" [matTooltipDisabled]="onEditMode"
+    >Save Changes</button>
+    <button class="btn dark" (click)="clearChanges()" [ngClass]="{disabled: !onEditMode}" matTooltip="nothing to clear" matTooltipPosition="below" [matTooltipDisabled]="onEditMode"
+    >Clear Changes</button>
+
+    <!-- info-->
+    <div  class="btn-info" (click)="showDialog()"
+    label="Help"><mat-icon material-icons-outlined aria-label="info">help_outline</mat-icon></div>
+    <p-dialog header="Help" [(visible)]="display" [style]="{width: '400px'}">
+      <br>This is your business about-page (it can include gallery).<br><br>
+      You can insert, edit or delete your-own text here.<br>
+      You can save your edit content or clear changes you've made at any time.<br>
+      You can also insert or delete pictures in the gallery.<br><br>
+      If you do not have a gallery here, you can add it in your personal zone page.<br><br>
+  </p-dialog>
+</div>
+<!--show gallery section if owner wanted it in settings of website-->
+  <sh-upload *ngIf="currentBusiness.bGallery"></sh-upload>
+</div>

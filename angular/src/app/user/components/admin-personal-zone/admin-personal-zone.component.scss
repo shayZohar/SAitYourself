@@ -1,0 +1,33 @@
+@import "../../../scss/base";
+
+.users {
+  border-bottom: 1px solid $middle-gray;
+  margin-bottom: 5rem;
+  padding: 2rem 0;
+  display: flex;
+
+  &.owners {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: $desktop) {
+    flex-direction: column;
+  }
+  h3 {
+    margin: 0 0 1em;
+    flex-basis: 40%;
+    @media (max-width: $desktop) {
+      flex-basis: auto;
+    }
+  }
+
+  .list {
+    flex-grow: 1;
+    max-width: 400px;
+    @media (max-width: $desktop) {
+      margin-top: 0.5em;
+    }
+
+  }
+}
+

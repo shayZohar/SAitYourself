@@ -1,0 +1,50 @@
+<form novalidate #login="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+
+
+  <div class="form-group short-col">
+    <input type="email" #emailVar="ngModel" required placeholder="email *" name="email" [(ngModel)]="user.email"
+      pattern="^([\w_\-\.]+)@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$"
+      matTooltip="ex. amit@gmail.com" matTooltipPosition="above" [matTooltipDisabled]="emailVar.valid">
+
+    <!-- validate email -->
+    <div *ngIf="emailVar.invalid && (emailVar.dirty || emailVar.touched)" class="errors">
+
+      <div *ngIf="emailVar?.errors.required">
+        Email is required
+      </div>
+      <div *ngIf="emailVar?.errors.pattern">
+        Invalid email
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="form-group short-col">
+    <sh-password class="form-group short-col" (eye)="eyeStatus=$event">
+      <input [type]="eyeStatus" #password="ngModel" required placeholder="password *" name="pass"
+        [(ngModel)]="user.pWord" pattern="^[a-zA-Z]\w{3,14}$">
+    </sh-password>
+
+    <!-- validate password -->
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="errors">
+
+      <div *ngIf="password?.errors.required">
+        Password is required.
+      </div>
+      <div *ngIf="password?.errors.pattern">
+        Letter following by 3-14 letters and digits
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- div is workaround to show tooltip on disabled button -->
+  <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="login.valid">
+    <input type="submit" [disabled]="login.invalid" label="login">
+  </div>
+</form>

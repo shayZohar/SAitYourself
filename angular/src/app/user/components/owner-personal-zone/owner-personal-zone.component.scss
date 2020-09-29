@@ -1,0 +1,49 @@
+@import "../../../scss/form";
+
+.h2-header,
+p {
+  margin-bottom: 3rem;
+}
+
+.add-business {
+  margin: 2rem 0 0 40%;
+  @media (max-width: $desktop) {
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+  form {
+    background: $gray;
+    padding: 1em;
+    max-width: 400px;
+  }
+}
+
+.selected-user-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .7);
+  .selected-user {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    padding: 3em;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

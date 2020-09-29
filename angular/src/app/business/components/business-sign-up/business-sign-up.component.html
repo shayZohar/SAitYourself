@@ -1,0 +1,23 @@
+
+<!--if user is connected to main system-->
+<div *ngIf="user !== undefined; else notInSystem">
+  <form novalidate #addClient="ngForm" autocomplete="off" (ngSubmit)="addNewClient(businessToRegisterTo)">
+    <label for="business-name">Business Name</label>
+
+    <input id="business-name" type="text" #businessNameVar="ngModel" id="businessName" name="BusinessName"
+      [(ngModel)]="businessToRegisterTo.bName" readonly>
+
+    <label for="email">Business Email</label>
+    <input id="email" readonly type="email" #emailVar="ngModel" id="email" name="email"
+      [(ngModel)]="businessToRegisterTo.bMail">
+
+
+    <input type="submit" value="Submit" matTooltip="sign-up to business" matTooltipPosition="below">
+
+
+  </form>
+</div>
+<!--if there is no user connected to system-->
+<ng-template #notInSystem>
+  <sh-sign-up [userTypes]="['Client']" [businesses]="[businessToRegisterTo]" (signUp)="onSubmit($event)"></sh-sign-up>
+</ng-template>

@@ -1,5 +1,80 @@
+
+
+
 <nav>
-  <ul>
-    <li  *ngFor="let link of links"> <a [routerLink]="link.route" [routerLinkActive]="'active'">{{link.label}}</a></li>
-  </ul>
+  <div type="button" class ="logo" matTooltip="back to main site" (click)="navigateHome()"><img src="assets/images/logo.svg"></div>
+
+
+
+
+  <section class="desktop-nav" mat-tab-nav-bar>
+
+    <!-- div is workaround to show tooltip on disabled button -->
+    <div [matTooltip]="messageDisabledTip" [matTooltipDisabled]="links.length > 0 && !(links[messageIndex].label == 'Messages' && !canSeeMessages)">
+      <a mat-tab-link [disabled]="link.label == 'Messages' && !canSeeMessages" *ngFor="let link of links" [active]="isActive(link)" [routerLink]="link.route" [routerLinkActive]="'active'" [matTooltip]="link.tip" matTooltipPosition="below">
+
+        <span *ngIf="link.label == 'Messages'; else notMessegasLabel" [matBadge]="unredCount" [matBadgeHidden]="unredCount <= 0" matBadgePosition="above before" matBadgeOverlap="false" matBadgeSize="small">
+          {{link.label}}</span>
+
+        <ng-template #notMessegasLabel>
+          <span>{{link.label}}</span>
+        </ng-template>
+
+        <ng-container *ngIf="link.icon == 'account_box'">
+          <mat-icon material-icons-outlined aria-label="personal zone icon">{{link.icon}}</mat-icon>
+        </ng-container>
+      </a>
+    </div>
+
+
+    <a mat-button class="icon" *ngIf="currentUser && currentUser.type != 'Unsigned User' " mat-tab-link [active]="setActive('/my-zone')" [routerLinkActive]="'active'" [routerLink]="'/my-zone'" matTooltip="personal zone">
+      <mat-icon material-icons-outlined aria-label="personal zone icon">account_box</mat-icon>
+    </a>
+    <a mat-button class="icon" *ngIf="currentUser && currentUser.type != 'Unsigned User' " mat-tab-link (click)="logout()" matTooltip="logout">
+      <mat-icon aria-label="logout icon">exit_to_app</mat-icon>
+    </a>
+  </section>
+
+
+  <!-- Mobile hamburger -->
+  <section class="mobile-nav">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <!-- Menu -->
+
+    <mat-menu #menu="matMenu">
+    <div [matTooltip]="messageDisabledTip" [matTooltipDisabled]="links.length > 0 && !(links[messageIndex].label == 'Messages' && !canSeeMessages)">
+
+      <button mat-menu-item [disabled]="link.label == 'Messages' && !canSeeMessages"
+        *ngFor="let link of links">
+        <mat-icon>{{link.icon}}</mat-icon>
+        <span>
+            <a  [routerLink]="link.route">{{link.label}}
+            </a>
+        </span>
+      </button>
+    </div>
+
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>
+            <a  *ngIf="currentUser && currentUser.type != 'Unsigned User' "   [routerLink]="'/my-zone'">Personal Zone
+            </a>
+        </span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span *ngIf="currentUser && currentUser.type != 'Unsigned User'" (click)="logout()">
+          Logout</span>
+
+      </button>
+    </mat-menu>
+
+
+
+  </section>
+
 </nav>

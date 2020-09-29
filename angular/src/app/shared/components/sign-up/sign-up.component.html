@@ -1,0 +1,118 @@
+<form novalidate #signup="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+  <div class="form-group short-col">
+    <input type="text" #firstNameVar="ngModel" required placeholder="first name *" id="fName" name="fName" [(ngModel)]="user.fName" pattern="^[a-zA-Z]+$">
+
+    <!-- validate first name-->
+    <div *ngIf="firstNameVar.invalid && (firstNameVar.dirty || firstNameVar.touched)" class="errors">
+      <div *ngIf="firstNameVar?.errors?.required">
+        First name is required
+      </div>
+      <div *ngIf="firstNameVar?.errors?.pattern">
+        Letters only
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group short-col">
+    <input type="text" #lastNameVar="ngModel" required placeholder="last name *" id="ltName" name="ltName" [(ngModel)]="user.lName" pattern="^[a-zA-Z]+$">
+    <!-- validate last name-->
+    <div *ngIf="lastNameVar?.invalid && (lastNameVar.dirty || lastNameVar.touched)" class="errors">
+      <div *ngIf="lastNameVar?.errors?.required">
+        Last name is required
+      </div>
+      <div *ngIf="lastNameVar?.errors?.pattern">
+        Letters only
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="email" #emailVar="ngModel" required placeholder="your email *" id="email" name="email" [(ngModel)]="user.email" pattern="^([\w_\-\.]+)@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$" matTooltip="ex. amit@gmail.com" matTooltipPosition="above" [matTooltipDisabled]="emailVar.valid">
+
+    <!-- validate email -->
+    <div *ngIf="emailVar?.invalid && (emailVar.dirty || emailVar.touched)" class="errors">
+      <div *ngIf="emailVar?.errors?.required">
+        Email is required
+      </div>
+      <div *ngIf="emailVar?.errors?.pattern">
+        Complete email
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <input type="text" #phoneVar="ngModel" autocomplete="nope" placeholder="phone number" id="phone" name="phone" [(ngModel)]="user.phone" pattern="^\d{2,3}-\d{7}$" matTooltip="ex. 12-1234567 or 123-1234567" matTooltipPosition="above" [matTooltipDisabled]="phoneVar?.valid && (phoneVar.dirty || phoneVar.touched)">
+    <div *ngIf="phoneVar?.invalid && (phoneVar.dirty || phoneVar.touched)" class="errors">
+      Formats: 12-1234567 or 123-1234567
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" #birthDayVar="ngModel" onfocus="this.type='date'" onblur="this.type='text'" placeholder="birthday" id="bDay" name="bDay" [(ngModel)]="birthDay">
+    <div *ngIf="birthDayVar?.invalid && (birthDayVar.dirty || birthDayVar.touched)" class="errors">
+      Format: DD/MM/YYYY</div>
+  </div>
+
+  <fieldset *ngIf="userTypes.length > 0">
+    <legend>Choose your user type *</legend>
+    <mat-radio-group class="radio-group" aria-label="radio-group-label" (ngModelChange)="clearBusiness()" [(ngModel)]="user.type" name="typeSelection">
+      <mat-radio-button class="radio-button" *ngFor="let uType of userTypes" [value]="uType">
+        {{uType}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </fieldset>
+
+  <div *ngIf="user.type === 'Business Owner'">
+    <div *ngIf="!isBusinessOwner(); else addOwnerToBusiness">
+      <sign-new-business [business]="business" [userEmail]="user.email" (businessToSign)="business=$event"></sign-new-business>
+    </div>
+    <ng-template #addOwnerToBusiness>
+      <input [disabled]="true" [value]="businessName()">
+    </ng-template>
+  </div>
+
+  <div *ngIf="user.type === 'Client'">
+    <ng-container *ngIf="businesses?.length > 0">
+      <sign-new-client [businesses]="businesses" (selectedBusiness)="business=$event"></sign-new-client>
+    </ng-container>
+  </div>
+
+  <ng-container ngModelGroup="passwords" #passwords="ngModelGroup">
+    <div class="form-group short-col">
+      <sh-password (eye)="eyeStatus=$event">
+        <input [type]="eyeStatus" #password="ngModel" required placeholder="password *" name="pass" [(ngModel)]="user.pWord" pattern="^[a-zA-Z]\w{3,14}$">
+      </sh-password>
+    </div>
+
+    <div class="form-group short-col">
+      <sh-password (eye)="verEyeStatus=$event">
+        <input [type]="verEyeStatus" #verifyPassword="ngModel" [(ngModel)]="verifyPassword.value" required placeholder="confirm password *" name="vPass" pattern="{{ password.value }}">
+      </sh-password>
+
+
+    </div>
+    <div *ngIf="passwords.invalid && passwords.dirty" class="errors">
+      <div *ngIf="password?.errors?.required">
+        Password is required
+      </div>
+      <div *ngIf="password?.errors?.pattern">
+        Letter following by 3-14 letters and digits
+      </div>
+      <div *ngIf="password?.valid && verifyPassword?.errors?.required">
+        Password confirmation is required
+      </div>
+      <div *ngIf="verifyPassword?.dirty && verifyPassword?.errors?.pattern">Passwords Are Not The Same</div>
+    </div>
+  </ng-container>
+
+
+
+  <!-- div is workaround to show tooltip on disabled button -->
+  <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="signup.valid">
+    <input type="submit" [disabled]="signup.invalid" label="sign up">
+  </div>
+
+</form>

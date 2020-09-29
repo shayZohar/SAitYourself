@@ -1,0 +1,24 @@
+<div *ngIf="showClientBusinesses">
+  <!-- client's registered businesses -->
+  <business-list [businessListToShow]="getBusinessArray()" [deleteString]="'Remove from Business'"
+    [type]="'Client'" (chosenBusiness)="changeBusiness($event, 'Client')" (deleteBusiness)="deleteBusiness($event)">
+  </business-list>
+</div>
+
+<!-- sining a new business -->
+<div class="add-business">
+  <button type="button" class="btn light btn-open" (click)="addNewBusiness()">{{addBusinessBtn}}</button>
+  <form *ngIf="signNewBusiness" novalidate #sigBusiness="ngForm" autocomplete="off"
+    (ngSubmit)="signUpNewBusiness(newBusiness)">
+
+    <sign-new-business [business]="newBusiness" [userEmail]="" (businessToSign)="newBusiness=$event">
+    </sign-new-business>
+    <div matTooltip="complete the form" matTooltipPosition="below" [matTooltipDisabled]="sigBusiness.valid">
+      <input class="form-group" type="submit" [disabled]="sigBusiness.invalid" label="sign up">
+    </div>
+  </form>
+</div>
+
+<!-- the selected business -->
+<business-display *ngIf="showChosenBusiness" [type]="displayType" [business]="getCurrentBusiness()"
+  (deleteBusiness)="deleteBusiness($event)"></business-display>

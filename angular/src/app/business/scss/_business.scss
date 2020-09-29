@@ -1,0 +1,64 @@
+@import "../../../scss/base";
+
+
+
+:host{
+  width: 100%;
+}
+
+
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+
+.bus-header {
+  font-family: "Work Sans", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 0.9;
+
+  span {
+    display: block;
+    font-weight: 800;
+    font-size: 6rem;
+  }
+  margin-bottom: 2rem;
+}
+
+.bus-sub-header {
+  font-size: 2.5rem;
+  margin: -1rem 0 3rem;
+  font-family: $header-font-family;
+
+  &::after {
+    content: "";
+    width: 50px;
+    height: 2px;
+    display: block;
+    margin-top: 3rem;
+    background-color: $bg-dark-color;
+  }
+}
+
+.bus-sub-sub-header {
+  font-size: 2rem;
+}
+
+.bus-text {
+  font-size: 1.6rem;
+  max-width: 85rem;
+}
+
+.edit-buttons {
+  margin: 4rem 0;
+
+  .btn {
+    margin-right: 1em;
+  }
+}
+

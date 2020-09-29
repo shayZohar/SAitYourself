@@ -1,0 +1,122 @@
+@import "../../../scss/base";
+
+
+
+.h2-header {
+  margin-top: 5rem;
+  font-weight: 600;
+
+  &.client {
+    padding-top: 5rem;
+    border-top: 1px solid $middle-gray;
+    font-size: 3rem;
+  }
+}
+.text {
+  font-size: 1.6rem;
+}
+
+.gallery-buttons {
+  button {
+    margin-right: 1rem;
+  }
+}
+
+.no-files,
+.files-uploaded {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+.files-uploaded {
+  list-style-position: inside;
+  p {
+    padding: 2rem 0;
+  }
+}
+
+.gallery {
+  margin: 3rem auto;
+
+  // padding: 5px;
+  // box-shadow: inset 1px 1px 5px $text-light-color,
+  //   inset -1px -1px 5px $text-light-color;
+  // background: white;
+
+  // padding: 2rem;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: 200px;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 2.5rem;
+  // grid-auto-rows: 100px;
+
+  .image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    // padding: 2rem;
+    // border: 1px solid $text-dark-color;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  ::ng-deep .mat-checkbox {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -16px; // top: -1px
+    right: 0; //-1px;
+
+    .mat-checkbox-frame {
+      // border-color: $text-dark-color;
+      border: 1px solid $text-dark-color;
+      z-index: 100;
+    }
+    .mat-checkbox-background {
+      background: transparent;
+    }
+
+    .mat-ripple-element {
+      background-color: $bg-light-color;
+    }
+  }
+
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: $text-light-color;
+    border: 1px solid $text-dark-color;
+    // color: $text-very-light-color;
+    // outline: 2px solid white;
+    // box-shadow: 1px 1px 2px white;
+  }
+}
+
+::ng-deep .lightbox-shown {
+  .lightbox-container {
+    width: 100vw !important;
+  }
+
+  .lightbox-close {
+    color: transparent;
+    text-shadow: none;
+  }
+
+  .lightbox-close::after {
+    content: "\2715";
+    color: white;
+    font-size: 2em;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+}

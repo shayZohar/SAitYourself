@@ -1,0 +1,11 @@
+@import "../../../scss/form";
+
+:host {
+  width: 100%;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1.5rem;
+}

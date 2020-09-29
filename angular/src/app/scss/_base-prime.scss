@@ -1,0 +1,157 @@
+@import "defs";
+
+//////////////////////////////////////////////////////////////////////////////////
+// primeng dialog
+//////////////////////////////////////////////////////////////////////////////////
+
+.ui-dialog {
+  .ui-dialog-titlebar {
+    letter-spacing: 1.1px;
+    font-family: $primary-font-family !important;
+    font-size: 1.6rem;
+  }
+  .ui-dialog-content {
+    font-family: $primary-font-family !important;
+    font-size: 1.6rem;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// primeng file upload
+//////////////////////////////////////////////////////////////////////////////////
+
+.ui-fileupload {
+  margin: 3rem 0 5rem;
+
+  .ui-fileupload-buttonbar {
+    background: transparent !important;
+    padding: 1rem 0 1rem !important;
+  }
+
+  .ui-fileupload-content {
+    font-family: $primary-font-family;
+    font-size: 1.6rem;
+  }
+
+  .ui-button {
+    background: transparent;
+    color: $text-dark-color;
+    border-color: currentColor;
+    letter-spacing: 1.5px;
+    font-family: $primary-font-family;
+    font-size: 1.3rem;
+
+    &:not(.ui-state-disabled):hover {
+      background: $bg-very-light-color;
+      opacity: 0.7;
+      color: $text-dark-color;
+      border-color: currentColor;
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// primeng selection
+//////////////////////////////////////////////////////////////////////////////////
+// ng-deep is for pushing in to ngPrime
+
+::ng-deep .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item {
+  background-color: transparent !important;
+  color: $text-dark-color !important;
+}
+
+::ng-deep .ui-chkbox .ui-chkbox-box.ui-state-active {
+  background: $bg-gradient !important;
+  border-color: $bg-dark-color !important;
+}
+
+.search,
+::ng-deep .ui-dropdown label,
+::ng-deep .ui-multiselect-label,
+::ng-deep .ui-inputtext {
+  display: block;
+  background-color: transparent;
+  padding: 0.7em;
+  width: 200px !important;
+  font-size: 1.3rem;
+  border: 1px solid;
+
+  border-color: $border-gray;
+  font-weight: normal;
+
+  letter-spacing: 1.5px;
+  font-family: $primary-font-family;
+  color: $text-dark-color;
+
+  border-radius: 3px;
+
+  &:focus {
+    border-color: rgb(51, 51, 51); //maybe this or default blue
+    outline: none !important;
+  }
+}
+
+
+
+::ng-deep .ui-multiselect-item,
+::ng-deep .ui-dropdown-panel {
+  background-color: $bg-light-color;
+}
+
+::ng-deep .ui-multiselect-item,
+::ng-deep .ui-dropdown-item {
+  color: $text-dark-color;
+  font-family: $primary-font-family;
+}
+::ng-deep .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
+  background-color: $bg-light-color !important;
+}
+
+::ng-deep .ui-multiselect-filter-icon,
+::ng-deep .pi-times {
+  color: $text-dark-color !important;
+}
+
+::ng-deep
+  .ui-multiselect-panel
+  .ui-multiselect-header
+  .ui-multiselect-filter-container
+  .ui-inputtext,
+::ng-deep
+  .ui-multiselect-panel
+  .ui-multiselect-header
+  .ui-multiselect-filter-container
+  .ui-inputtext:focus {
+  width: 100% !important;
+  font-family: $primary-font-family;
+  border-color: $bg-dark-color;
+}
+
+::ng-deep .ui-datepicker {
+  table {
+    td.ui-datepicker-today > a.ui-state-active,
+    td.ui-datepicker-today > span.ui-state-active,
+    td > a.ui-state-active,
+    td > span.ui-state-active {
+      background-color: $bg-dark-color;
+    }
+  }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// input switch
+//////////////////////////////////////////////////////////////////////////////////
+::ng-deep body {
+  .ui-inputswitch {
+    &.ui-inputswitch-checked .ui-inputswitch-slider {
+      background-color: $bg-light-color  !important;
+    }
+  }
+
+  .ui-inputswitch.ui-inputswitch-checked:not(.ui-state-disabled):hover
+    .ui-inputswitch-slider {
+    background-color: $bg-light-color !important;
+    opacity: 0.7;
+  }
+}

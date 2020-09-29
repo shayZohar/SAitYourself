@@ -1,0 +1,23 @@
+<div class="business-show" *ngIf="businessListToShow">
+  <!-- the selected business from the list -->
+  <h2 class="mid-heading">Current Business: <span>{{business?.bName ||'no selection'}}</span>
+  </h2>
+
+  <!-- auto complete list -->
+  <div class="pick-wrapper">
+    <mat-form-field class="pick-business">
+      <input matInput type="text" [matAutocomplete]="auto" autocomplete="off" placeholder="Pick Business" aria-label="Business" name="business" [(ngModel)]="testBusiness" #businessVar="ngModel" (ngModelChange)="doFilter()">
+      <mat-autocomplete name="chosen" #auto="matAutocomplete" autocomplete="off" [displayWith]="displayProperty" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let business of filteredBusinesses" [value]="business">
+          {{business.bName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="btn-wrapper">
+      <button type="button" [ngClass]="{disabled: haveBusiness}" [disabled]="haveBusiness"  class="btn light" (click)="goToSite()">Browse</button>
+
+      <button type="button" [ngClass]="{disabled: haveBusiness}" [disabled]="haveBusiness" class="btn light delete" (click)="removeBusiness()">{{deleteString || 'Delete Business'}}</button>
+    </div>
+  </div>
+</div>

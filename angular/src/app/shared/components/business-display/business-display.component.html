@@ -1,0 +1,71 @@
+<ng-container *ngIf="business != undefined">
+
+  <div class="owners-clients-show" *ngIf="type !== 'Client' && type !== 'All'">
+
+    <!-- resetting gallery and appointment (schedular) -->
+    <h3>View Settings</h3>
+    <form class="fields">
+
+      <div class="switch">
+        <p-inputSwitch #haveApointment="ngModel" [(ngModel)]="appComponent"  name="Appointment" inputId="switch-scheduler" (onChange)="changeAppStatus=true" [disabled]="disableGalApp"></p-inputSwitch>
+        <label for="switch-scheduler">Scheduler</label>
+      </div>
+
+      <div class="switch">
+        <p-inputSwitch #haveGallery="ngModel" [(ngModel)]="gallery" name="Gallery" inputId="switch-gallery"  (onChange)="changeGlleryStatus=true" [disabled]="disableGalApp"></p-inputSwitch>
+        <label for="switch-gallery">Gallery</label>
+      </div>
+
+      <button *ngIf="type != 'Admin'" class="btn light" [ngClass]="{disabled: !(changeAppStatus || changeGlleryStatus)}" (click)="saveAppAndGal()" [disabled]="!(changeAppStatus || changeGlleryStatus)">Save</button>
+
+    </form>
+  </div>
+
+  <div *ngIf="type !== 'Client' && showClients" class="details" [ngClass]="{show: showDetails, hide: !showDetails}" matTooltip="show/hide more details" (click)="showDetails=!showDetails"></div>
+
+  <!-- owners/clients ... -->
+
+  <ng-container *ngIf="type !== 'Client' && type !== 'All'  && showDetails">
+    <!-- oweners list -->
+    <div class="owners-clients-show owners" *ngIf="type !== 'Client' && showOwners">
+      <h3>{{ownersCount}} Owners:</h3>
+      <div class="list" *ngIf="haveOwners(); else onlyOwner">
+        <users-list [usersListToShow]="getUsersArray('Business Owner')" [type]="'Business Owner'" (listLength)="ownersCount=$event+1" [placeHolder]="'Owner'" (selectedUser)="selected($event,'Business Owner')">
+        </users-list>
+      </div>
+      <ng-template #onlyOwner>
+        <p>You are the only owner of the business</p>
+      </ng-template>
+    </div>
+
+
+    <button type="button" class="btn light add-owner" *ngIf="isBusinessOwner()" (click)="changeAddOwnerButton()">{{addOwnerButton}}</button>
+
+    <sh-add-owner *ngIf="addOwner" (submitOwner)="ownerAdded($event)"></sh-add-owner>
+
+    <!-- clients list -->
+    <div class="owners-clients-show" *ngIf="type !== 'Client' && showClients  && showDetails">
+      <h3>{{clientCount}} Clients:</h3>
+      <div class="list" *ngIf="haveClients(); else noClientsBlock">
+        <users-list [usersListToShow]="getUsersArray('Client')" [type]="'Client'" [placeHolder]="'Client'" (listLength)="clientCount=$event" (selectedUser)="selected($event,'Client')">
+        </users-list>
+      </div>
+      <ng-template #noClientsBlock>
+        <p>There are no clients</p>
+      </ng-template>
+    </div>
+
+
+    <!-- blocked clients -->
+    <div class="owners-clients-show" *ngIf=" type !== 'Client' && showBlocked  && showDetails">
+      <h3>{{blockedClientCount}} Blocked Clients:</h3>
+      <div class="list" *ngIf="haveBlocked(); else noBlockedBlock">
+        <users-list [usersListToShow]="getUsersArray('Blocked')" [type]="'Blocked'" (listLength)="blockedClientCount=$event" [placeHolder]="'Blocked'" (selectedUser)="selected($event,'Blocked')"></users-list>
+      </div>
+      <ng-template #noBlockedBlock>
+        <p>There are no blocked clients</p>
+      </ng-template>
+    </div>
+
+  </ng-container>
+</ng-container>

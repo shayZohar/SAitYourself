@@ -4,9 +4,71 @@
   margin: 0;
   padding: 0;
 }
-body{
-  font-size: 62.5%;
+
+html {
+  scroll-behavior: smooth;
 }
 
+
 @import "app/scss/base";
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+
+:root{
+
+  font-size: 62.5%;
+
+  @media (max-width: $tablet){
+    font-size: 55%;
+  }
+
+  // @media(max-width: $mobile){
+  //   font-size: 50%;
+  // }
+}
+
+
+body{
+  font-family:  $primary-font-family;
+  // background: url(assets/images/bg.jpg) no-repeat center center fixed;
+  // background: url(https://picsum.photos/1500/?image=110&grayscale) no-repeat center center fixed;
+  background: $bg-gradient;
+
+  background: #fff;
+  // background-blend-mode: multiply;
+  // background-size: cover;
+  width: 100vw !important;  //  prevent shifting with scroll
+  overflow-y: scroll;
+
+  *::selection  {
+    background-color: $bg-light-color !important;
+  }
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// scrollbar
+//////////////////////////////////////////////////////////////////////////////////
+
+::-webkit-scrollbar {
+  width: $scroll-bar-width;
+  height: $scroll-bar-width;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-thumb {
+  // background-color: rgba(0, 0, 0, .9); //darken($dark-gray, 20%);
+  background-color: $bg-medium-color;
+  border-radius: 10px;
+  outline: 2px solid slategrey;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: darken($middle-gray, 10%);
+}
 

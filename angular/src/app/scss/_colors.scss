@@ -1,0 +1,34 @@
+
+$text-light-color: hsl(300, 64%, 21%);
+
+$text-white: #fff;
+$light-blue: #e1e8ef; // stopper pertimiter color
+
+$light-purple: rgb(214, 118, 238);
+
+
+
+
+
+$border-gray: rgb(158, 158, 158);
+$gray: rgb(62, 64, 90);
+$light-gray: #777;
+$dark-gray: #808080;
+$middle-gray: #d3d3d3;
+$very-light-gray: #eee;
+$body-text-color: rgb(245, 235, 235);
+
+
+$bg-dark-color: rgb(19, 20, 60);
+$bg-medium-color: #2b3070;
+$bg-light-color: rgb(39, 222, 216);
+$bg-very-light-color: #eee;
+$bg-special-color: #535578;
+
+$text-dark-color: #130959;
+$text-light-color: rgb(39, 222, 216);
+$text-very-light-color: #fff;
+
+$link-color: $text-very-light-color;
+
+$bg-gradient: linear-gradient(to right, $bg-dark-color, $bg-medium-color);

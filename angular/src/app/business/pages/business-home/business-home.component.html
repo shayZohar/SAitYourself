@@ -1,0 +1,34 @@
+<div class="main-wrapper">
+  <h1 class="bus-header">Welcome to <span>{{businessName}}</span></h1>
+
+  <!--editable-->
+  <h2 class="bus-sub-header" #editableHeader [attr.contenteditable]="canEdit"
+    (input)="bHome.headerText=$event.target.textContent; onEditMode = true"></h2>
+
+  <h3 class="bus-sub-sub-header" #editableSubHeader [attr.contenteditable]="canEdit"
+    (input)="bHome.subHeaderText=$event.target.innerText; onEditMode = true"></h3>
+
+
+
+  <p class="bus-text" #editableArtical [attr.contenteditable]="canEdit"
+    (input)="bHome.articalText=$event.target.innerText; onEditMode = true"></p>
+  <!--if owner is premitted to edit the page-->
+  <div class="edit-buttons" *ngIf="canEdit">
+    <button class="btn dark" (click)="saveChanges()" [ngClass]="{disabled: !onEditMode}" matTooltip="nothing to save"
+      matTooltipPosition="below" [matTooltipDisabled]="onEditMode">Save Changes</button>
+    <button class="btn dark" (click)="clearChanges()" [ngClass]="{disabled: !onEditMode}" matTooltip="nothing to clear"
+      matTooltipPosition="below" [matTooltipDisabled]="onEditMode">Clear Changes</button>
+
+
+    <!-- info-->
+    <div class="btn-info" (click)="showDialog()" label="Help">
+      <mat-icon material-icons-outlined aria-label="info">help_outline</mat-icon>
+    </div>
+    <p-dialog header="Help" [(visible)]="display" [style]="{width: '400px'}">
+      <br>This is your business home-page.<br><br>
+      You can insert, edit or delete your-own text here.
+      Just write anything you like about your business.<br><br>
+      You can save your edit content or clear changes you've made at any time.<br><br>
+    </p-dialog>
+  </div>
+</div>

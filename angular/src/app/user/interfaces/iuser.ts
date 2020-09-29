@@ -1,19 +1,37 @@
 export interface IUser {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    birthDay: string;
-    userType: string;
-    password: string;
+  fName?: string;
+  lName?: string;
+  email: string;
+  phone?: string;
+  bDay?: number;
+  type?: string;
+  pWord?: string;
+  lastSeen?: number;
+  token?: string;
+}
+
+export enum ERole {
+  User = 'Client',
+  Admin = 'Admin',
+  Business = 'Business Owner',
+  Unsigned = 'Unsigned User'
 }
 
 export const emptyUser = (): IUser => ({
-   firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    birthDay: '',
-    userType: '',
-    password: ''
+  fName: '',
+  lName: '',
+  email: '',
+  phone: '',
+  bDay: 0,
+  type: 'Client',
+  pWord: '',
+  lastSeen: 0,
 });
+
+export const updateLastSeen = (userEmail: string, date: number): IUser => ({
+  email: userEmail,
+  lastSeen: date,
+});
+
+
+

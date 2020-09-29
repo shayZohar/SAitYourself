@@ -1,0 +1,94 @@
+
+
+<div class="main-wrapper">
+
+  <!-- if user allowed to be shown the calendar-->
+  <ng-container *ngIf=showScheduler>
+    <h2 class="h2-header">Appointment Schedule</h2>
+
+    <!-- client mode -->
+    <ng-container *ngIf="showScheduler && clientMode">
+      <!-- client data -->
+      <div class="client-mode">
+        <div class="selections">
+          <section>
+            <label for="date-time">Pick Appointment Data/Time</label>
+            <p-calendar inputId="date-time" [(ngModel)]="clientDate" showTime="true" hourFormat="24" [minDate]="today"
+              [disabledDays]="disabledDays"></p-calendar>
+          </section>
+          <button type="button" class="btn dark" (click)="SendAppointmentMessage()">Send</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- business data -->
+    <div class="business-mode">
+      <!--choosing date and time for calendar-->
+      <div class="selections" *ngIf="rendered">
+        <section>
+          <label for="working-days">Working Days</label>
+          <p-multiSelect inputId="working-days" [options]="Days" [(ngModel)]="selectedDays"></p-multiSelect>
+        </section>
+
+        <section>
+          <label for="start-time">Start Time</label>
+          <p-calendar inputId="start-time" [(ngModel)]="start" [timeOnly]="true" hourFormat="24"></p-calendar>
+        </section>
+
+        <section>
+          <label for="end-time">End Time </label>
+          <p-calendar inputId="end-time" [(ngModel)]="end" [timeOnly]="true" hourFormat="24"></p-calendar>
+        </section>
+        <button type="button" class="btn dark save" (click)="SaveDaysAndTime()">Save</button>
+      </div>
+
+
+      <!-- recieved-message-appointment -->
+
+      <div class="message" *ngIf="!isClient && isOwner">
+
+      <!-- info-->
+      <div  class="btn-info" (click)="showDialog()"
+      label="Help"><mat-icon material-icons-outlined aria-label="info">help_outline</mat-icon></div>
+      <p-dialog header="Help" [(visible)]="display" [style]="{width: '400px'}">
+        <br>This is your business appointment page.<br><br>
+        You can select yourworking-days and working-hours here so your client will know
+        when they can request an appointment.<br><br>
+        Pressing on 'Save' button will save the changes you've made.<br><br>
+        You can view requests for appointment from your client and set them in the calendar.<br><br>
+        By pressing on selected hour in the calendar, a window will be open and you then
+        can select the appointment time and the client of it.<br><br>
+        By pressing on the save button, a message will be sent to your client with
+        the appointment details.
+        You can delete or edit it at any time.<br><br>
+      </p-dialog>
+
+      <!-- when user is owner, it can view and edit appointment requests by clients-->
+        <p-dropdown [options]="resMessages" [(ngModel)]="selectedMessage" placeholder="Requests" optionLabel="senderId"
+          [showClear]="true"></p-dropdown>
+
+        <div class="request">
+          <p *ngIf="selectedMessage != null"><span>Appointment request: </span>
+            {{selectedMessage ? selectedMessage.messContent : 'none'}}</p>
+
+
+
+            <!--- deleting current appointment request-->
+          <button class="btn dark delete" *ngIf="selectedMessage != null && ownerCanEdit"
+          (click)="DeleteMessageRequest()">Delete</button>
+
+        </div>
+      </div>
+    </div>
+    <!-- end-business-mode -->
+  </ng-container>
+
+
+  <!--client mode- to send appointment request to the business-->
+  <ejs-schedule #scheduleObj [workDays]='workWeekDays' [readonly]='readOnly' [selectedDate]='selectedDate'
+    [workHours]="scheduleHours" startHour={{scheduleHours.start}} endHour={{scheduleHours.end}}
+    [eventSettings]='eventSettings' (actionBegin)="onActionBegin($event)" (popupOpen)='onPopupOpen($event)'
+    currentView='WorkWeek' (created)='created($event)'></ejs-schedule>
+
+
+</div>

@@ -1,16 +1,29 @@
 @import "scss/base";
 
 :host {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
   display: flex;
   flex-grow: 1;
-  border: 1px solid red;
-
+  //border: 1px solid red;
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////
+// spinner
+//////////////////////////////////////////////////////////////////////////////////
+mat-spinner.spinner {
+  position: fixed;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  display: flex;
+  align-content: center;
+  align-items: center;
+  z-index: 1000; // always on top if presents
+  ::ng-deep circle {
+    stroke: $bg-light-color; // circle color
+  }
+}

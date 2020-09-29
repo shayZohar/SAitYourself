@@ -1,0 +1,32 @@
+@import "../../../scss/form";
+
+
+.mat-form-field .mat-select-value,
+.mat-form-field .mat-form-field-label,
+.mat-form-field .mat-error {
+  color: $text-very-light-color;
+}
+
+input.ng-dirty.ng-invalid[_ngcontent-c12],
+textarea.ng-dirty.ng-invalid[_ngcontent-c12],
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  border: none;
+  color: $text-very-light-color;
+  padding-left: 0;
+}
+
+::ng-deep
+  .mat-autocomplete-panel
+  .mat-option.mat-selected:not(.mat-active):not(:hover):not(.mat-option-disabled),
+::ng-deep .mat-autocomplete-panel.mat-autocomplete-visible {
+  background-color: $bg-special-color;
+  color: $text-very-light-color;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $text-very-light-color;
+}
+
+::ng-deep .mat-form-field.pick-business {
+  padding-bottom: 0 !important;
+}

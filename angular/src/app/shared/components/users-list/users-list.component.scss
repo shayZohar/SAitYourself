@@ -1,0 +1,32 @@
+@import "../../../scss/form";
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// formfield from material
+//////////////////////////////////////////////////////////////////////////////////
+
+
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  border: none;
+  color: $text-very-light-color;
+  padding-left: 0;
+}
+
+.mat-form-field {
+  padding-bottom: 0 !important;
+  width: 100%;
+}
+
+///////////////////////////////////////////
+
+.pick-user {
+  flex-grow: 1;
+  max-width: 400px;
+  @media (max-width: $desktop) {
+    margin-top: 0.5em;
+  }
+}
+
+///////////////////////////////////////////

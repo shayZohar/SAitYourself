@@ -1,0 +1,96 @@
+@import "../../../scss/form";
+
+//////////////////////////////////////////////////////////////////////////////////
+// formfield from material
+//////////////////////////////////////////////////////////////////////////////////
+::ng-deep .mat-form-field {
+  .mat-form-field-wrapper {
+    background: $gray;
+    padding: 1em;
+  }
+}
+
+::ng-deep .mat-form-field-underline {
+  width: calc(100% - 2em) !important;
+}
+
+.mat-form-field .mat-select-value,
+.mat-form-field .mat-form-field-label,
+.mat-form-field .mat-error {
+  color: $text-very-light-color;
+}
+
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  border: none;
+  color: $text-very-light-color;
+  padding-left: 0;
+}
+
+::ng-deep
+  .mat-autocomplete-panel
+  .mat-option.mat-selected:not(.mat-active):not(:hover):not(.mat-option-disabled),
+::ng-deep .mat-autocomplete-panel.mat-autocomplete-visible {
+  background-color: $bg-special-color;
+  color: $text-very-light-color;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $text-very-light-color;
+}
+
+.mat-form-field.pick-business {
+  padding-bottom: 0 !important;
+}
+
+///////////////////////////////////////////
+
+.business-show {
+  display: flex;
+
+  @media (max-width: $desktop) {
+    flex-direction: column;
+  }
+  .mid-heading {
+    font-size: 1.8rem;
+    font-weight: normal;
+    span {
+      display: block;
+      margin-top: 0.5em;
+      letter-spacing: 1.1px;
+      font-weight: 700;
+      font-family: $header-font-family;
+      @media (max-width: $desktop) {
+        display: inline-block;
+        margin-top: 0;
+      }
+    }
+    flex-basis: 40%;
+    @media (max-width: $desktop) {
+      flex-basis: auto;
+    }
+  }
+
+  .pick-wrapper {
+    background: $gray;
+    border-radius: 7px;
+
+    flex-grow: 1;
+    max-width: 400px;
+    @media (max-width: $desktop) {
+      margin-top: 0.5em;
+    }
+  }
+  .btn-wrapper {
+
+    .btn {
+      background: $bg-very-light-color;
+      color: $text-dark-color;
+    }
+    padding: 1em;
+    .delete {
+      margin-left: 1rem;
+    }
+  }
+}

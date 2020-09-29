@@ -1,0 +1,17 @@
+<ng-container ngModelGroup="signClient" autocomplete="off">
+  <!-- autocomlete list of businesses-->
+  <div *ngIf="businesses?.length > 1; else oneBusiness">
+    <mat-form-field class="pick-business">
+      <input matInput type="text" [matAutocomplete]="auto" placeholder="Pick A Business" aria-label="Business" required autocomplete="nope" name="business" [(ngModel)]="testBusiness" #businessVar="ngModel" (ngModelChange)="doFilter()">
+      <mat-autocomplete name="chosen" #auto="matAutocomplete" [displayWith]="displayProperty" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let business of filteredBusinesses" [value]="business">
+          {{business.bName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <ng-template #oneBusiness>
+    <input [(ngModel)]="businesses[0].bName" #oneBusinessVar="ngModel" name="inBusiness" [disabled]="true">
+  </ng-template>
+</ng-container>
